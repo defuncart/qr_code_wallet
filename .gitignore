@@ -48,3 +48,6 @@ macos/
 
 # FVM
 .fvm/flutter_sdk
+
+# Local assets
+assets_dev/l10n/
