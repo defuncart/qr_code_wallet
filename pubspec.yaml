@@ -16,11 +16,16 @@ dependencies:
   qr_flutter:
   mobile_scanner:
   flutter_riverpod:
+  isar: ^4.0.0-dev.14
+  isar_flutter_libs: ^4.0.0-dev.14
+  hive: ^4.0.0-dev.2
+  path_provider:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  build_runner:
   arb_generator:
 
 flutter:
