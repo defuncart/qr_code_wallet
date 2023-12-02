@@ -15,11 +15,12 @@ dependencies:
   intl:
   qr_flutter:
   mobile_scanner:
-  flutter_riverpod:
   isar: ^4.0.0-dev.14
   isar_flutter_libs: ^4.0.0-dev.14
   hive: ^4.0.0-dev.2
   path_provider:
+  flutter_riverpod: ^3.0.0-dev.3
+  riverpod_annotation: ^3.0.0-dev.3
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +28,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   build_runner:
   arb_generator:
+  riverpod_generator: ^3.0.0-dev.11
 
 flutter:
   uses-material-design: true

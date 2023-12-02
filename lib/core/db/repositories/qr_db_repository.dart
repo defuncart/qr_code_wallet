@@ -1,20 +1,18 @@
 import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_wallet/core/db/models/qr_code.dart';
 
 class QRDBRepository {
-  late Isar _isar;
+  late final Isar _isar;
 
-  Future<void> init() async {
-    final dir = await getApplicationDocumentsDirectory();
+  void init(String directory) {
     _isar = Isar.open(
       schemas: [QRCodeSchema],
-      directory: dir.path,
+      directory: directory,
       engine: IsarEngine.isar,
     );
   }
 
-  Stream<List<QRCode>> watch() => _isar.qRCodes.where().watch();
+  Stream<List<QRCode>> watch() => _isar.qRCodes.where().watch(fireImmediately: true);
 
   void addEntry({
     required String data,
