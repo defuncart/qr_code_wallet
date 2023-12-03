@@ -13,12 +13,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl:
+  go_router:
   qr_flutter:
   mobile_scanner:
+  path_provider:
   isar: ^4.0.0-dev.14
   isar_flutter_libs: ^4.0.0-dev.14
   hive: ^4.0.0-dev.2
-  path_provider:
   flutter_riverpod: ^3.0.0-dev.3
   riverpod_annotation: ^3.0.0-dev.3
 

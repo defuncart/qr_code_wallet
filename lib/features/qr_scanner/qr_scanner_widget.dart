@@ -6,6 +6,8 @@ import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRScannerWidget extends ConsumerStatefulWidget {
+  static const path = '/scanner';
+
   const QRScannerWidget({super.key});
 
   @override
