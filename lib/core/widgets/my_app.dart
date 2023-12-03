@@ -1,16 +1,17 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/features/home/home_page.dart';
 import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_widget.dart';
+import 'package:qr_code_wallet/features/settings/settings_page.dart';
+import 'package:qr_code_wallet/features/settings/state.dart';
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
@@ -31,6 +32,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   Future<void> _init() async {
     final dbDir = await getApplicationSupportDirectory();
     ref.read(codesDbProvider).init(dbDir.path);
+    Hive.defaultDirectory = dbDir.path;
     setState(() => _isInitialized = true);
   }
 
@@ -41,7 +43,7 @@ class _MyAppState extends ConsumerState<MyApp> {
 }
 
 class _FakeApp extends StatelessWidget {
-  const _FakeApp({Key? key}) : super(key: key);
+  const _FakeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +56,12 @@ class _FakeApp extends StatelessWidget {
   }
 }
 
-class _MyApp extends StatelessWidget {
+class _MyApp extends ConsumerWidget {
   const _MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final colors = [
-      Colors.amber,
-      Colors.cyan,
-      Colors.teal,
-      Colors.pink,
-      Colors.purple,
-    ];
-    final color = colors[Random().nextInt(colors.length)];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final color = ref.watch(primaryColorControllerProvider).color;
 
     return MaterialApp.router(
       routerConfig: _router,
@@ -91,6 +86,10 @@ final _router = GoRouter(
     GoRoute(
       path: HomePage.path,
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: SettingsPage.path,
+      builder: (context, state) => const SettingsPage(),
     ),
     GoRoute(
       path: QRScannerWidget.path,

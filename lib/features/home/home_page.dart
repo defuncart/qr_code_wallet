@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_widget.dart';
+import 'package:qr_code_wallet/features/settings/settings_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,6 +17,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.appTitle),
+        actions: [
+          IconButton(
+            onPressed: () => context.push(SettingsPage.path),
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: const HomePageContent(),
       floatingActionButton: FloatingActionButton.large(
