@@ -164,7 +164,7 @@ class Footer extends StatelessWidget {
               ),
               child: Text(context.l10n.settingsSourceCode),
             ),
-          ],
+          ].intersperse(Gap(8)),
         ),
         _TextWithLink(
           text: '${context.l10n.settingsDataPrivacy1} ${context.l10n.settingsDataPrivacy2}',
