@@ -28,5 +28,7 @@ class QRDBRepository {
         );
       });
 
-  void removeEntry(int id) => _isar.qRCodes.delete(id);
+  void removeEntry(int id) => _isar.write((isar) {
+        isar.qRCodes.delete(id);
+      });
 }
