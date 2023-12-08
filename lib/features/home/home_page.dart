@@ -104,7 +104,33 @@ class QRTile extends StatelessWidget {
             // errorCorrectionLevel: QrErrorCorrectLevel.H,
             ),
         title: Text(qrCode.label),
+        onTap: () => showQRDialog(context, qrCode: qrCode),
       ),
     );
   }
 }
+
+Future<void> showQRDialog(
+  BuildContext context, {
+  required QRCode qrCode,
+}) =>
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: QrImageView(
+            data: qrCode.data,
+            version: QrVersions.auto,
+            // size: 48,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            eyeStyle: QrEyeStyle(
+              eyeShape: QrEyeShape.square,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            dataModuleStyle: QrDataModuleStyle(
+              dataModuleShape: QrDataModuleShape.square,
+              color: Theme.of(context).colorScheme.onSurface,
+            )
+            // errorCorrectionLevel: QrErrorCorrectLevel.H,
+            ),
+      ),
+    );
