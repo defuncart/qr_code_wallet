@@ -92,7 +92,7 @@ class QRTile extends StatelessWidget {
             data: qrCode.data,
             version: QrVersions.auto,
             size: 48,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: Colors.transparent,
             eyeStyle: QrEyeStyle(
               eyeShape: QrEyeShape.square,
               color: Theme.of(context).colorScheme.onSurface,
