@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qr_code_wallet/core/widgets/qr_code_widget.dart';
 
 class QRScannerWidget extends ConsumerStatefulWidget {
   static const path = '/scanner';
@@ -42,12 +42,9 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
       body: _data != null
           ? Row(
               children: [
-                QrImageView(
+                QRCodeWidget(
                   data: _data!,
-                  version: QrVersions.auto,
                   size: 200.0,
-                  backgroundColor: Theme.of(context).colorScheme.onSurface,
-                  // errorCorrectionLevel: QrErrorCorrectLevel.H,
                 ),
                 Expanded(
                   child: TextField(

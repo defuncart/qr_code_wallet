@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:qr_code_wallet/core/db/models/qr_code.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
+import 'package:qr_code_wallet/core/widgets/qr_code_widget.dart';
 import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_widget.dart';
 import 'package:qr_code_wallet/features/settings/settings_page.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class HomePage extends StatelessWidget {
   static const path = '/';
@@ -88,21 +88,11 @@ class QRTile extends StatelessWidget {
       direction: DismissDirection.endToStart,
       onDismissed: (_) => onDismiss(),
       child: ListTile(
-        leading: QrImageView(
-            data: qrCode.data,
-            version: QrVersions.auto,
-            size: 48,
-            backgroundColor: Colors.transparent,
-            eyeStyle: QrEyeStyle(
-              eyeShape: QrEyeShape.square,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            dataModuleStyle: QrDataModuleStyle(
-              dataModuleShape: QrDataModuleShape.square,
-              color: Theme.of(context).colorScheme.onSurface,
-            )
-            // errorCorrectionLevel: QrErrorCorrectLevel.H,
-            ),
+        leading: QRCodeWidget(
+          data: qrCode.data,
+          size: 48,
+          backgroundColor: Colors.transparent,
+        ),
         title: Text(qrCode.label),
         onTap: () => showQRDialog(context, qrCode: qrCode),
       ),
@@ -117,20 +107,8 @@ Future<void> showQRDialog(
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        child: QrImageView(
-            data: qrCode.data,
-            version: QrVersions.auto,
-            // size: 48,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            eyeStyle: QrEyeStyle(
-              eyeShape: QrEyeShape.square,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            dataModuleStyle: QrDataModuleStyle(
-              dataModuleShape: QrDataModuleShape.square,
-              color: Theme.of(context).colorScheme.onSurface,
-            )
-            // errorCorrectionLevel: QrErrorCorrectLevel.H,
-            ),
+        child: QRCodeWidget(
+          data: qrCode.data,
+        ),
       ),
     );
