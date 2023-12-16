@@ -8,6 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
+import 'package:qr_code_wallet/core/theme/theme.dart';
 import 'package:qr_code_wallet/features/home/home_page.dart';
 import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_widget.dart';
 import 'package:qr_code_wallet/features/settings/settings_page.dart';
@@ -49,8 +50,8 @@ class _FakeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: LightTheme.generate(),
+      darkTheme: DarkTheme.generate(),
       home: const SizedBox.shrink(),
     );
   }
@@ -74,8 +75,8 @@ class _MyApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData.from(colorScheme: ColorScheme.light(primary: color)),
-      darkTheme: ThemeData.from(colorScheme: ColorScheme.dark(primary: color)),
+      theme: LightTheme.generate(primaryColor: color),
+      darkTheme: DarkTheme.generate(primaryColor: color),
       onGenerateTitle: (context) => context.l10n.appTitle,
     );
   }
