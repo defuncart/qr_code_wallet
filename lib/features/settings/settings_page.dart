@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -158,9 +157,7 @@ class Footer extends StatelessWidget {
             TextButton(
               onPressed: () => launchUrl(
                 Uri.parse('https://github.com/defuncart/qr_code_wallet'),
-                mode: defaultTargetPlatform == TargetPlatform.android
-                    ? LaunchMode.externalApplication
-                    : LaunchMode.platformDefault,
+                mode: LaunchMode.platformDefault,
               ),
               child: Text(context.l10n.settingsSourceCode),
             ),
@@ -168,7 +165,7 @@ class Footer extends StatelessWidget {
         ),
         _TextWithLink(
           text: '${context.l10n.settingsDataPrivacy1} ${context.l10n.settingsDataPrivacy2}',
-          url: 'https://github.com/defuncart/der_die_das/blob/main/privacy_policy.md',
+          url: 'https://github.com/defuncart/qr_code_wallet/blob/main/privacy_policy.md',
           textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                 fontWeight: FontWeight.normal,
               ),
@@ -237,13 +234,9 @@ class _ClickableTextSpan extends TextSpan {
         );
 
   static Future<void> _openUrl(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(
-        Uri.parse(url),
-        mode: defaultTargetPlatform == TargetPlatform.android
-            ? LaunchMode.externalApplication
-            : LaunchMode.platformDefault,
-      );
-    }
+    await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.platformDefault,
+    );
   }
 }
