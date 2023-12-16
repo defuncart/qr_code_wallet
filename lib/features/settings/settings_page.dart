@@ -17,7 +17,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text(context.l10n.settingsPageTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -96,12 +96,12 @@ class PrimaryColorButton extends StatelessWidget {
           shape: BoxShape.circle,
         ),
         child: isSelected
-            ? Icon(
+            ? const Icon(
                 Icons.check,
                 size: kMinInteractiveDimension * 0.6,
                 color: Colors.white,
               )
-            : SizedBox(
+            : const SizedBox(
                 height: kMinInteractiveDimension * 0.6,
                 width: kMinInteractiveDimension * 0.6,
               ),
