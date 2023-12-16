@@ -36,6 +36,7 @@ dev_dependencies:
   flutter_launcher_icons:
   app_store_screenshots:
     git: https://github.com/defuncart/app_store_screenshots
+  mocktail:
 
 flutter:
   uses-material-design: true
