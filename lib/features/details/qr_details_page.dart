@@ -19,29 +19,35 @@ class QRDetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final qrCode = ref.read(getQRCodeProvider(id: id));
 
+    if (qrCode == null) {
+      return Scaffold(
+        appBar: AppBar(),
+      );
+    }
+
     return Scaffold(
-      appBar: AppBar(),
-      body: qrCode != null
-          ? Column(
-              children: [
-                QRCodeWidget(data: qrCode.data),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: () => Share.share(qrCode.data),
-                      icon: const Icon(Icons.share),
-                    ),
-                    const SizedBox(width: 48),
-                    IconButton(
-                      onPressed: () => Clipboard.setData(ClipboardData(text: qrCode.data)),
-                      icon: const Icon(Icons.copy),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          : const SizedBox.shrink(),
+      appBar: AppBar(
+        title: Text(qrCode.label),
+      ),
+      body: Column(
+        children: [
+          QRCodeWidget(data: qrCode.data),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                onPressed: () => Share.share(qrCode.data),
+                icon: const Icon(Icons.share),
+              ),
+              const SizedBox(width: 48),
+              IconButton(
+                onPressed: () => Clipboard.setData(ClipboardData(text: qrCode.data)),
+                icon: const Icon(Icons.copy),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
