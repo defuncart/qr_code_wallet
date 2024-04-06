@@ -19,7 +19,7 @@ final settingsRepositoryProvider = AutoDisposeProvider<SettingsRepository>.inter
 );
 
 typedef SettingsRepositoryRef = AutoDisposeProviderRef<SettingsRepository>;
-String _$primaryColorControllerHash() => r'2f0418e215985dc924ef80edb633db5aa2f77e2b';
+String _$primaryColorControllerHash() => r'a22e303f644b0941030183682bb672f1735a549f';
 
 /// See also [PrimaryColorController].
 @ProviderFor(PrimaryColorController)

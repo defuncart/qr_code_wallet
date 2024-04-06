@@ -94,21 +94,10 @@ class QRTile extends StatelessWidget {
           backgroundColor: Colors.transparent,
         ),
         title: Text(qrCode.label),
-        onTap: () => showQRDialog(context, qrCode: qrCode),
+        onTap: () => context.push(
+          '/details/${qrCode.id}',
+        ),
       ),
     );
   }
 }
-
-Future<void> showQRDialog(
-  BuildContext context, {
-  required QRCode qrCode,
-}) =>
-    showDialog(
-      context: context,
-      builder: (context) => Dialog(
-        child: QRCodeWidget(
-          data: qrCode.data,
-        ),
-      ),
-    );

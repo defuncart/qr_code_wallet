@@ -24,6 +24,7 @@ dependencies:
   riverpod_annotation: ^3.0.0-dev.3
   gap:
   url_launcher:
+  share_plus:
 
 dev_dependencies:
   flutter_test:

@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/core/theme/theme.dart';
+import 'package:qr_code_wallet/features/details/qr_details_page.dart';
 import 'package:qr_code_wallet/features/home/home_page.dart';
 import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_widget.dart';
 import 'package:qr_code_wallet/features/settings/settings_page.dart';
@@ -95,6 +96,12 @@ final _router = GoRouter(
     GoRoute(
       path: QRScannerWidget.path,
       builder: (context, state) => const QRScannerWidget(),
+    ),
+    GoRoute(
+      path: QRDetailsPage.path,
+      builder: (context, state) => QRDetailsPage(
+        id: int.tryParse(state.pathParameters['id']!)!,
+      ),
     ),
   ],
 );

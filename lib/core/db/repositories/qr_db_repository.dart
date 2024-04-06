@@ -14,6 +14,8 @@ class QRDBRepository {
 
   Stream<List<QRCode>> watch() => _isar.qRCodes.where().watch(fireImmediately: true);
 
+  QRCode? get(int id) => _isar.qRCodes.get(id);
+
   void addEntry({
     required String data,
     required String label,
