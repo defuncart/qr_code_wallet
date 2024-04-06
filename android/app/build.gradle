@@ -44,7 +44,7 @@ android {
         applicationId "com.defuncart.qrcodewallet"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21 // mobile_scanner
+        minSdkVersion 23 // 21 mobile_scanner, 23 isar
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

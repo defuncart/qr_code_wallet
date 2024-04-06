@@ -46,5 +46,9 @@ app.*.map.json
 # macOS is only used for development
 macos/
 
-# FVM
-.fvm/flutter_sdk
+# Local assets
+assets_dev/l10n/
+assets_dev/app_icons/
+
+# FVM Version Cache
+.fvm/
