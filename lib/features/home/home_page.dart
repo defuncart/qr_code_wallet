@@ -28,9 +28,9 @@ class HomePage extends StatelessWidget {
       body: const HomePageContent(),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () => context.push(QRScannerWidget.path),
-        child: Icon(
+        child: const Icon(
           Icons.qr_code_scanner,
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: Colors.white,
           size: 64,
         ),
       ),
