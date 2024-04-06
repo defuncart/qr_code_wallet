@@ -40,7 +40,7 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
         title: Text(context.l10n.scannerTitle),
       ),
       body: _data != null
-          ? Row(
+          ? Column(
               children: [
                 QRCodeWidget(
                   data: _data!,
@@ -50,6 +50,10 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
                   child: TextField(
                     controller: _controller,
                     focusNode: _focusNode,
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                      hintText: context.l10n.scannerHint,
+                    ),
                     textInputAction: TextInputAction.done,
                     onEditingComplete: () {
                       ref.read(codesDbProvider).addEntry(
