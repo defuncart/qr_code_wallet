@@ -19,12 +19,12 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(context.l10n.settingsPageTitle),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
+      body: const Padding(
+        padding: EdgeInsets.all(8),
         child: Column(
           children: [
             Expanded(
-              child: const PrimaryColorSettings(),
+              child: PrimaryColorSettings(),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -60,7 +60,7 @@ class PrimaryColorSettings extends ConsumerWidget {
                 (pColor) => PrimaryColorButton(
                   primaryColor: pColor,
                   isSelected: primaryColor == pColor,
-                  onTap: () => ref.read(primaryColorControllerProvider.notifier).state = pColor,
+                  onTap: () => ref.read(primaryColorControllerProvider.notifier).set(pColor),
                 ),
               )
               .toList()
@@ -126,7 +126,7 @@ class Footer extends StatelessWidget {
           text: TextSpan(
             style: Theme.of(context).textTheme.titleMedium,
             children: [
-              TextSpan(
+              const TextSpan(
                 text: 'Made with ',
               ),
               TextSpan(
@@ -135,7 +135,7 @@ class Footer extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              TextSpan(
+              const TextSpan(
                 text: ' in Berlin',
               ),
             ],
@@ -161,7 +161,7 @@ class Footer extends StatelessWidget {
               ),
               child: Text(context.l10n.settingsSourceCode),
             ),
-          ].intersperse(Gap(8)),
+          ].intersperse(const Gap(8)),
         ),
         _TextWithLink(
           text: '${context.l10n.settingsDataPrivacy1} ${context.l10n.settingsDataPrivacy2}',

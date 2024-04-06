@@ -45,7 +45,7 @@ class _MyAppState extends ConsumerState<MyApp> {
 }
 
 class _FakeApp extends StatelessWidget {
-  const _FakeApp({super.key});
+  const _FakeApp();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class _FakeApp extends StatelessWidget {
 }
 
 class _MyApp extends ConsumerWidget {
-  const _MyApp({super.key});
+  const _MyApp();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -68,7 +68,7 @@ class _MyApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: _router,
       debugShowCheckedModeBanner: false,
-      scrollBehavior: _AppScrollBehavior(),
+      scrollBehavior: const _AppScrollBehavior(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

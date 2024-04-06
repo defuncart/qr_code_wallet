@@ -13,7 +13,9 @@ class PrimaryColorController extends _$PrimaryColorController {
   PrimaryColor build() => ref.read(settingsRepositoryProvider).primaryColor;
 
   void set(PrimaryColor value) {
-    ref.read(settingsRepositoryProvider).primaryColor = value;
-    state = value;
+    if (state != value) {
+      ref.read(settingsRepositoryProvider).primaryColor = value;
+      state = value;
+    }
   }
 }

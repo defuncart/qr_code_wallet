@@ -52,7 +52,6 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
                     focusNode: _focusNode,
                     textInputAction: TextInputAction.done,
                     onEditingComplete: () {
-                      print('here');
                       ref.read(codesDbProvider).addEntry(
                             data: _data!,
                             label: _controller.text,
