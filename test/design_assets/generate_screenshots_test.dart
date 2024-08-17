@@ -16,11 +16,6 @@ import 'package:qr_code_wallet/features/settings/settings_repository.dart';
 import 'package:qr_code_wallet/features/settings/state.dart';
 
 void main() {
-  const textStyle = TextStyle(
-    fontSize: 96,
-    color: Colors.white,
-  );
-
   const qrCodes = [
     QRCode(
       id: 1,
@@ -38,12 +33,13 @@ void main() {
       label: 'DHL Return Label',
     ),
   ];
+  const primaryColor = PrimaryColor.amber;
 
   late SettingsRepository mockSettingsRepository;
 
   setUp(() {
     mockSettingsRepository = _MockSettingsRepository();
-    when(() => mockSettingsRepository.primaryColor).thenReturn(PrimaryColor.cyan);
+    when(() => mockSettingsRepository.primaryColor).thenReturn(primaryColor);
   });
 
   generateAppStoreScreenshots(
@@ -57,10 +53,17 @@ void main() {
         AppLocalizations.delegate,
       ],
       background: ScreenshotBackground.solid(
-        color: PrimaryColor.amber.color,
+        color: primaryColor.color,
       ),
-      theme: DarkTheme.generate(primaryColor: PrimaryColor.cyan.color),
-      textStyle: textStyle,
+      theme: DarkTheme.generate(
+        primaryColor: primaryColor.color,
+      ),
+      textOptions: const ScreenshotTextOptions(
+        textStyle: TextStyle(
+          fontSize: 96,
+          color: Colors.white,
+        ),
+      ),
     ),
     screens: [
       ScreenshotScenario(
