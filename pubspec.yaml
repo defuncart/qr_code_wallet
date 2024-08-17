@@ -18,7 +18,12 @@ dependencies:
   mobile_scanner:
   path_provider:
   isar: ^4.0.0-dev.14
-  isar_flutter_libs: ^4.0.0-dev.14
+  # https://github.com/isar/isar/issues/1647
+  isar_flutter_libs:
+    git:
+      url: https://github.com/realth000/isar/
+      ref: 98a6cc1236498ce79a9096f772da754df838da0c
+      path: packages/isar_flutter_libs
   hive: ^4.0.0-dev.2
   flutter_riverpod: ^3.0.0-dev.3
   riverpod_annotation: ^3.0.0-dev.3
@@ -54,5 +59,5 @@ flutter_launcher_icons:
   android: "ic_launcher"
   ios: false
   image_path: "assets_dev/app_icons/app_icon.png"
-  adaptive_icon_background: "#00BCD4"
+  adaptive_icon_background: "#FFC107"
   adaptive_icon_foreground: "assets_dev/app_icons/android_icon_foreground.png"

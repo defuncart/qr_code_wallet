@@ -30,5 +30,5 @@ class _Keys {
 class _Defaults {
   _Defaults._();
 
-  static const primaryColor = PrimaryColor.cyan;
+  static const primaryColor = PrimaryColor.amber;
 }

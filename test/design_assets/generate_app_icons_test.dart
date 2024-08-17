@@ -4,14 +4,14 @@ import 'package:qr_code_wallet/features/settings/primary_color.dart';
 
 void main() {
   generateAppIcon(
-    onBuildIcon: () => const AppIcon(
-      size: 512,
+    onBuildIcon: (size) => AppIcon(
+      size: size,
     ),
   );
 
   generateAppIconAndroidForeground(
-    onBuildIcon: () => const AppIcon(
-      size: 512 - 40 * 2,
+    onBuildIcon: (size) => AppIcon(
+      size: size - 40 * 2,
       hasTransparentBackground: true,
     ),
     padding: const EdgeInsets.all(40),
@@ -33,7 +33,7 @@ class AppIcon extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      color: hasTransparentBackground ? Colors.transparent : PrimaryColor.cyan.color,
+      color: hasTransparentBackground ? Colors.transparent : PrimaryColor.amber.color,
       child: Center(
         child: Icon(
           Icons.qr_code,
