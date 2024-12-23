@@ -11,10 +11,9 @@ void main() {
 
   generateAppIconAndroidForeground(
     onBuildIcon: (size) => AppIcon(
-      size: size - 40 * 2,
+      size: size,
       hasTransparentBackground: true,
     ),
-    padding: const EdgeInsets.all(40),
   );
 }
 
@@ -38,7 +37,7 @@ class AppIcon extends StatelessWidget {
         child: Icon(
           Icons.qr_code,
           color: Colors.white,
-          size: size * 0.6,
+          size: size * 0.65,
         ),
       ),
     );
