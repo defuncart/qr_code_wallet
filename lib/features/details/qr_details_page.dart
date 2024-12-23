@@ -17,7 +17,7 @@ class QRDetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final qrCode = ref.read(getQRCodeProvider(id: id));
+    final qrCode = ref.watch(getQRCodeProvider(id: id));
 
     if (qrCode == null) {
       return Scaffold(

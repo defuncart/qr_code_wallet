@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:qr_code_wallet/core/db/models/qr_code.dart';
+import 'package:qr_code_wallet/core/db/repositories/qr_db_repository.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/core/theme/theme.dart';
 import 'package:qr_code_wallet/features/details/qr_details_page.dart';
@@ -36,9 +37,11 @@ void main() {
   const primaryColor = PrimaryColor.amber;
 
   late SettingsRepository mockSettingsRepository;
+  late QRDBRepository mockQRDBRepository;
 
   setUp(() {
     mockSettingsRepository = _MockSettingsRepository();
+    mockQRDBRepository = _MockQRDBRepository();
     when(() => mockSettingsRepository.primaryColor).thenReturn(primaryColor);
   });
 
@@ -78,12 +81,14 @@ void main() {
         ),
       ),
       ScreenshotScenario(
+        onSetUp: (_) {
+          when(() => mockQRDBRepository.get(1)).thenReturn(qrCodes.first);
+        },
         onBuildScreen: () => const QRDetailsPage(id: 1),
         wrapper: (child) => ProviderScope(
           overrides: [
-            getQRCodeProvider.overrideWith(
-              (ref) => qrCodes.first,
-            ),
+            // workaround until watchCodesProvider.overrideWith lands in stable
+            codesDbProvider.overrideWithValue(mockQRDBRepository),
           ],
           child: child,
         ),
@@ -103,3 +108,5 @@ void main() {
 }
 
 class _MockSettingsRepository extends Mock implements SettingsRepository {}
+
+class _MockQRDBRepository extends Mock implements QRDBRepository {}
