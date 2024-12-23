@@ -6,7 +6,7 @@ part of 'state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$codesDbHash() => r'bee77b8111b57a972b94d445af70b9e68259baad';
+String _$codesDbHash() => r'0d10f8a4ec61b9fce1d3ad11b235536e42716474';
 
 /// See also [codesDb].
 @ProviderFor(codesDb)
@@ -18,8 +18,10 @@ final codesDbProvider = Provider<QRDBRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CodesDbRef = ProviderRef<QRDBRepository>;
-String _$watchCodesHash() => r'473ad44f59335b1182eb6aab3e2d136528541948';
+String _$watchCodesHash() => r'692d3fbef39c027e79235562ad53efc53854c754';
 
 /// See also [watchCodes].
 @ProviderFor(watchCodes)
@@ -31,8 +33,10 @@ final watchCodesProvider = AutoDisposeStreamProvider<List<QRCode>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef WatchCodesRef = AutoDisposeStreamProviderRef<List<QRCode>>;
-String _$getQRCodeHash() => r'ee398cd3e37f8a32aeb2b83e344f893e1ff5aeaa';
+String _$getQRCodeHash() => r'6d663503dc00ad42ca924c0fe55bd985e309570c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -60,22 +64,9 @@ class _SystemHash {
 const getQRCodeProvider = GetQRCodeFamily();
 
 /// See also [getQRCode].
-class GetQRCodeFamily extends Family {
+class GetQRCodeFamily extends Family<QRCode?> {
   /// See also [getQRCode].
   const GetQRCodeFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
-
-  @override
-  String? get name => r'getQRCodeProvider';
 
   /// See also [getQRCode].
   GetQRCodeProvider call({
@@ -86,7 +77,6 @@ class GetQRCodeFamily extends Family {
     );
   }
 
-  @visibleForOverriding
   @override
   GetQRCodeProvider getProviderOverride(
     covariant GetQRCodeProvider provider,
@@ -96,26 +86,18 @@ class GetQRCodeFamily extends Family {
     );
   }
 
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(QRCode? Function(GetQRCodeRef ref) create) {
-    return _$GetQRCodeFamilyOverride(this, create);
-  }
-}
-
-class _$GetQRCodeFamilyOverride implements FamilyOverride {
-  _$GetQRCodeFamilyOverride(this.overriddenFamily, this.create);
-
-  final QRCode? Function(GetQRCodeRef ref) create;
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
 
   @override
-  final GetQRCodeFamily overriddenFamily;
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  GetQRCodeProvider getProviderOverride(
-    covariant GetQRCodeProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getQRCodeProvider';
 }
 
 /// See also [getQRCode].
@@ -137,7 +119,7 @@ class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
         );
 
   GetQRCodeProvider._internal(
-    super.create, {
+    super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
@@ -150,7 +132,7 @@ class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
 
   @override
   Override overrideWith(
-    QRCode? Function(GetQRCodeRef ref) create,
+    QRCode? Function(GetQRCodeRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -167,29 +149,8 @@ class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
   }
 
   @override
-  ({
-    int id,
-  }) get argument {
-    return (id: id,);
-  }
-
-  @override
   AutoDisposeProviderElement<QRCode?> createElement() {
     return _GetQRCodeProviderElement(this);
-  }
-
-  GetQRCodeProvider _copyWith(
-    QRCode? Function(GetQRCodeRef ref) create,
-  ) {
-    return GetQRCodeProvider._internal(
-      (ref) => create(ref as GetQRCodeRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      id: id,
-    );
   }
 
   @override
@@ -206,6 +167,8 @@ class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GetQRCodeRef on AutoDisposeProviderRef<QRCode?> {
   /// The parameter `id` of this provider.
   int get id;
@@ -218,4 +181,4 @@ class _GetQRCodeProviderElement extends AutoDisposeProviderElement<QRCode?> with
   int get id => (origin as GetQRCodeProvider).id;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

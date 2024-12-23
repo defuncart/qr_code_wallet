@@ -4,8 +4,8 @@ publish_to: 'none'
 version: 0.0.1+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
-  flutter: '>=3.19.0 < 4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: '>=3.27.0 < 4.0.0'
 
 dependencies:
   flutter:
@@ -25,8 +25,8 @@ dependencies:
       ref: 98a6cc1236498ce79a9096f772da754df838da0c
       path: packages/isar_flutter_libs
   hive: ^4.0.0-dev.2
-  flutter_riverpod: ^3.0.0-dev.3
-  riverpod_annotation: ^3.0.0-dev.3
+  flutter_riverpod:
+  riverpod_annotation:
   gap:
   url_launcher:
   share_plus:
@@ -34,14 +34,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
   build_runner:
   arb_generator:
-  riverpod_generator: ^3.0.0-dev.11
+  riverpod_generator:
   flutter_launcher_icons:
   app_store_screenshots:
     git: https://github.com/defuncart/app_store_screenshots
   mocktail:
+  custom_lint:
+  riverpod_lint:
 
 flutter:
   uses-material-design: true
