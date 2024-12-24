@@ -6,36 +6,24 @@ part 'qr_code.g.dart';
 class QRCode {
   const QRCode({
     required this.id,
+    required this.type,
     required this.data,
     required this.label,
-    // this.title,
-    // this.recipients,
-    // this.status = Status.pending,
   });
 
   final int id;
-
+  final QRCodeType type;
   final String data;
-
   final String label;
-
-  // @Index(type: IndexType.value)
-  // final String? title;
-
-  // final List<Recipient>? recipients;
-
-  // final Status status;
 }
 
-// @embedded
-// class Recipient {
-//   String? name;
-
-//   String? address;
-// }
-
-// enum Status {
-//   draft,
-//   pending,
-//   sent,
-// }
+enum QRCodeType {
+  url,
+  vCard,
+  text,
+  email,
+  phone,
+  sms,
+  wifi,
+  other,
+}

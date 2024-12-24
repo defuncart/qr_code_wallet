@@ -21,6 +21,11 @@ const QRCodeSchema = IsarGeneratedSchema(
     embedded: false,
     properties: [
       IsarPropertySchema(
+        name: 'type',
+        type: IsarType.byte,
+        enumMap: {"url": 0, "vCard": 1, "text": 2, "email": 3, "phone": 4, "sms": 5, "wifi": 6, "other": 7},
+      ),
+      IsarPropertySchema(
         name: 'data',
         type: IsarType.string,
       ),
@@ -41,8 +46,9 @@ const QRCodeSchema = IsarGeneratedSchema(
 
 @isarProtected
 int serializeQRCode(IsarWriter writer, QRCode object) {
-  IsarCore.writeString(writer, 1, object.data);
-  IsarCore.writeString(writer, 2, object.label);
+  IsarCore.writeByte(writer, 1, object.type.index);
+  IsarCore.writeString(writer, 2, object.data);
+  IsarCore.writeString(writer, 3, object.label);
   return object.id;
 }
 
@@ -50,12 +56,21 @@ int serializeQRCode(IsarWriter writer, QRCode object) {
 QRCode deserializeQRCode(IsarReader reader) {
   final int _id;
   _id = IsarCore.readId(reader);
+  final QRCodeType _type;
+  {
+    if (IsarCore.readNull(reader, 1)) {
+      _type = QRCodeType.url;
+    } else {
+      _type = _qRCodeType[IsarCore.readByte(reader, 1)] ?? QRCodeType.url;
+    }
+  }
   final String _data;
-  _data = IsarCore.readString(reader, 1) ?? '';
+  _data = IsarCore.readString(reader, 2) ?? '';
   final String _label;
-  _label = IsarCore.readString(reader, 2) ?? '';
+  _label = IsarCore.readString(reader, 3) ?? '';
   final object = QRCode(
     id: _id,
+    type: _type,
     data: _data,
     label: _label,
   );
@@ -68,9 +83,17 @@ dynamic deserializeQRCodeProp(IsarReader reader, int property) {
     case 0:
       return IsarCore.readId(reader);
     case 1:
-      return IsarCore.readString(reader, 1) ?? '';
+      {
+        if (IsarCore.readNull(reader, 1)) {
+          return QRCodeType.url;
+        } else {
+          return _qRCodeType[IsarCore.readByte(reader, 1)] ?? QRCodeType.url;
+        }
+      }
     case 2:
       return IsarCore.readString(reader, 2) ?? '';
+    case 3:
+      return IsarCore.readString(reader, 3) ?? '';
     default:
       throw ArgumentError('Unknown property: $property');
   }
@@ -79,6 +102,7 @@ dynamic deserializeQRCodeProp(IsarReader reader, int property) {
 sealed class _QRCodeUpdate {
   bool call({
     required int id,
+    QRCodeType? type,
     String? data,
     String? label,
   });
@@ -92,14 +116,16 @@ class _QRCodeUpdateImpl implements _QRCodeUpdate {
   @override
   bool call({
     required int id,
+    Object? type = ignore,
     Object? data = ignore,
     Object? label = ignore,
   }) {
     return collection.updateProperties([
           id
         ], {
-          if (data != ignore) 1: data as String?,
-          if (label != ignore) 2: label as String?,
+          if (type != ignore) 1: type as QRCodeType?,
+          if (data != ignore) 2: data as String?,
+          if (label != ignore) 3: label as String?,
         }) >
         0;
   }
@@ -108,6 +134,7 @@ class _QRCodeUpdateImpl implements _QRCodeUpdate {
 sealed class _QRCodeUpdateAll {
   int call({
     required List<int> id,
+    QRCodeType? type,
     String? data,
     String? label,
   });
@@ -121,12 +148,14 @@ class _QRCodeUpdateAllImpl implements _QRCodeUpdateAll {
   @override
   int call({
     required List<int> id,
+    Object? type = ignore,
     Object? data = ignore,
     Object? label = ignore,
   }) {
     return collection.updateProperties(id, {
-      if (data != ignore) 1: data as String?,
-      if (label != ignore) 2: label as String?,
+      if (type != ignore) 1: type as QRCodeType?,
+      if (data != ignore) 2: data as String?,
+      if (label != ignore) 3: label as String?,
     });
   }
 }
@@ -139,6 +168,7 @@ extension QRCodeUpdate on IsarCollection<int, QRCode> {
 
 sealed class _QRCodeQueryUpdate {
   int call({
+    QRCodeType? type,
     String? data,
     String? label,
   });
@@ -152,12 +182,14 @@ class _QRCodeQueryUpdateImpl implements _QRCodeQueryUpdate {
 
   @override
   int call({
+    Object? type = ignore,
     Object? data = ignore,
     Object? label = ignore,
   }) {
     return query.updateProperties(limit: limit, {
-      if (data != ignore) 1: data as String?,
-      if (label != ignore) 2: label as String?,
+      if (type != ignore) 1: type as QRCodeType?,
+      if (data != ignore) 2: data as String?,
+      if (label != ignore) 3: label as String?,
     });
   }
 }
@@ -176,14 +208,16 @@ class _QRCodeQueryBuilderUpdateImpl implements _QRCodeQueryUpdate {
 
   @override
   int call({
+    Object? type = ignore,
     Object? data = ignore,
     Object? label = ignore,
   }) {
     final q = query.build();
     try {
       return q.updateProperties(limit: limit, {
-        if (data != ignore) 1: data as String?,
-        if (label != ignore) 2: label as String?,
+        if (type != ignore) 1: type as QRCodeType?,
+        if (data != ignore) 2: data as String?,
+        if (label != ignore) 3: label as String?,
       });
     } finally {
       q.close();
@@ -196,6 +230,17 @@ extension QRCodeQueryBuilderUpdate on QueryBuilder<QRCode, QRCode, QOperations> 
 
   _QRCodeQueryUpdate get updateAll => _QRCodeQueryBuilderUpdateImpl(this);
 }
+
+const _qRCodeType = {
+  0: QRCodeType.url,
+  1: QRCodeType.vCard,
+  2: QRCodeType.text,
+  3: QRCodeType.email,
+  4: QRCodeType.phone,
+  5: QRCodeType.sms,
+  6: QRCodeType.wifi,
+  7: QRCodeType.other,
+};
 
 extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
   QueryBuilder<QRCode, QRCode, QAfterFilterCondition> idEqualTo(
@@ -278,6 +323,86 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     });
   }
 
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> typeEqualTo(
+    QRCodeType value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        EqualCondition(
+          property: 1,
+          value: value.index,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> typeGreaterThan(
+    QRCodeType value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterCondition(
+          property: 1,
+          value: value.index,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> typeGreaterThanOrEqualTo(
+    QRCodeType value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterOrEqualCondition(
+          property: 1,
+          value: value.index,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> typeLessThan(
+    QRCodeType value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessCondition(
+          property: 1,
+          value: value.index,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> typeLessThanOrEqualTo(
+    QRCodeType value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessOrEqualCondition(
+          property: 1,
+          value: value.index,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> typeBetween(
+    QRCodeType lower,
+    QRCodeType upper,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        BetweenCondition(
+          property: 1,
+          lower: lower.index,
+          upper: upper.index,
+        ),
+      );
+    });
+  }
+
   QueryBuilder<QRCode, QRCode, QAfterFilterCondition> dataEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -285,7 +410,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         EqualCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -300,7 +425,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         GreaterCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -315,7 +440,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         GreaterOrEqualCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -330,7 +455,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         LessCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -345,7 +470,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         LessOrEqualCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -361,7 +486,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         BetweenCondition(
-          property: 1,
+          property: 2,
           lower: lower,
           upper: upper,
           caseSensitive: caseSensitive,
@@ -377,7 +502,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         StartsWithCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -392,7 +517,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         EndsWithCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -404,7 +529,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
-          property: 1,
+          property: 2,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -416,7 +541,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
-          property: 1,
+          property: 2,
           wildcard: pattern,
           caseSensitive: caseSensitive,
         ),
@@ -428,7 +553,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
-          property: 1,
+          property: 2,
           value: '',
         ),
       );
@@ -439,7 +564,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
-          property: 1,
+          property: 2,
           value: '',
         ),
       );
@@ -453,7 +578,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         EqualCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -468,7 +593,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         GreaterCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -483,7 +608,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         GreaterOrEqualCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -498,7 +623,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         LessCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -513,7 +638,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         LessOrEqualCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -529,7 +654,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         BetweenCondition(
-          property: 2,
+          property: 3,
           lower: lower,
           upper: upper,
           caseSensitive: caseSensitive,
@@ -545,7 +670,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         StartsWithCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -560,7 +685,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         EndsWithCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -572,7 +697,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
-          property: 2,
+          property: 3,
           value: value,
           caseSensitive: caseSensitive,
         ),
@@ -584,7 +709,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
-          property: 2,
+          property: 3,
           wildcard: pattern,
           caseSensitive: caseSensitive,
         ),
@@ -596,7 +721,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
-          property: 2,
+          property: 3,
           value: '',
         ),
       );
@@ -607,7 +732,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
-          property: 2,
+          property: 3,
           value: '',
         ),
       );
@@ -630,10 +755,22 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
     });
   }
 
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(1);
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(1, sort: Sort.desc);
+    });
+  }
+
   QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByData({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
-        1,
+        2,
         caseSensitive: caseSensitive,
       );
     });
@@ -642,7 +779,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
   QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByDataDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
-        1,
+        2,
         sort: Sort.desc,
         caseSensitive: caseSensitive,
       );
@@ -652,7 +789,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
   QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByLabel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
-        2,
+        3,
         caseSensitive: caseSensitive,
       );
     });
@@ -661,7 +798,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
   QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByLabelDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
-        2,
+        3,
         sort: Sort.desc,
         caseSensitive: caseSensitive,
       );
@@ -682,41 +819,59 @@ extension QRCodeQuerySortThenBy on QueryBuilder<QRCode, QRCode, QSortThenBy> {
     });
   }
 
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(1);
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(1, sort: Sort.desc);
+    });
+  }
+
   QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByData({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(1, caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByDataDesc({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(1, sort: Sort.desc, caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(2, caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabelDesc({bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByDataDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(2, sort: Sort.desc, caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabel({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(3, caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabelDesc({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(3, sort: Sort.desc, caseSensitive: caseSensitive);
     });
   }
 }
 
 extension QRCodeQueryWhereDistinct on QueryBuilder<QRCode, QRCode, QDistinct> {
+  QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(1);
+    });
+  }
+
   QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByData({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(1, caseSensitive: caseSensitive);
+      return query.addDistinctBy(2, caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByLabel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(2, caseSensitive: caseSensitive);
+      return query.addDistinctBy(3, caseSensitive: caseSensitive);
     });
   }
 }
@@ -728,15 +883,21 @@ extension QRCodeQueryProperty1 on QueryBuilder<QRCode, QRCode, QProperty> {
     });
   }
 
-  QueryBuilder<QRCode, String, QAfterProperty> dataProperty() {
+  QueryBuilder<QRCode, QRCodeType, QAfterProperty> typeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(1);
     });
   }
 
-  QueryBuilder<QRCode, String, QAfterProperty> labelProperty() {
+  QueryBuilder<QRCode, String, QAfterProperty> dataProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(2);
+    });
+  }
+
+  QueryBuilder<QRCode, String, QAfterProperty> labelProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(3);
     });
   }
 }
@@ -748,15 +909,21 @@ extension QRCodeQueryProperty2<R> on QueryBuilder<QRCode, R, QAfterProperty> {
     });
   }
 
-  QueryBuilder<QRCode, (R, String), QAfterProperty> dataProperty() {
+  QueryBuilder<QRCode, (R, QRCodeType), QAfterProperty> typeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(1);
     });
   }
 
-  QueryBuilder<QRCode, (R, String), QAfterProperty> labelProperty() {
+  QueryBuilder<QRCode, (R, String), QAfterProperty> dataProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(2);
+    });
+  }
+
+  QueryBuilder<QRCode, (R, String), QAfterProperty> labelProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(3);
     });
   }
 }
@@ -768,15 +935,21 @@ extension QRCodeQueryProperty3<R1, R2> on QueryBuilder<QRCode, (R1, R2), QAfterP
     });
   }
 
-  QueryBuilder<QRCode, (R1, R2, String), QOperations> dataProperty() {
+  QueryBuilder<QRCode, (R1, R2, QRCodeType), QOperations> typeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(1);
     });
   }
 
-  QueryBuilder<QRCode, (R1, R2, String), QOperations> labelProperty() {
+  QueryBuilder<QRCode, (R1, R2, String), QOperations> dataProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(2);
+    });
+  }
+
+  QueryBuilder<QRCode, (R1, R2, String), QOperations> labelProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(3);
     });
   }
 }

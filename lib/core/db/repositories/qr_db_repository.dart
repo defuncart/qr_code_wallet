@@ -17,6 +17,7 @@ class QRDBRepository {
   QRCode? get(int id) => _isar.qRCodes.get(id);
 
   void addEntry({
+    required QRCodeType type,
     required String data,
     required String label,
   }) =>
@@ -24,6 +25,7 @@ class QRDBRepository {
         isar.qRCodes.put(
           QRCode(
             id: _isar.qRCodes.autoIncrement(),
+            type: type,
             data: data,
             label: label,
           ),

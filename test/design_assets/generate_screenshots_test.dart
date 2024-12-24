@@ -20,16 +20,19 @@ void main() {
   const qrCodes = [
     QRCode(
       id: 1,
-      data: 'flutter',
+      type: QRCodeType.url,
+      data: 'flutter.dev',
       label: 'Flutter',
     ),
     QRCode(
       id: 1,
+      type: QRCodeType.wifi,
       data: 'WIFI:S:Dash;T:WPA;P:flutter;H:false',
       label: 'WiFi Login',
     ),
     QRCode(
       id: 1,
+      type: QRCodeType.text,
       data: 'dhl',
       label: 'DHL Return Label',
     ),

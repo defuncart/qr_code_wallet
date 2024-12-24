@@ -1,6 +1,9 @@
+import 'dart:developer' show log;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:qr_code_wallet/core/db/models/qr_code.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/core/widgets/qr_code_widget.dart';
@@ -15,7 +18,7 @@ class QRScannerWidget extends ConsumerStatefulWidget {
 }
 
 class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
-  String? _data;
+  Barcode? _data;
   late final TextEditingController _controller;
   late final FocusNode _focusNode;
 
@@ -43,7 +46,7 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
           ? Column(
               children: [
                 QRCodeWidget(
-                  data: _data!,
+                  data: _data!.rawValue ?? '',
                   size: 200.0,
                 ),
                 Expanded(
@@ -57,7 +60,8 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
                     textInputAction: TextInputAction.done,
                     onEditingComplete: () {
                       ref.read(codesDbProvider).addEntry(
-                            data: _data!,
+                            type: _data!.type.toQRCodeType(),
+                            data: _data!.rawValue ?? '',
                             label: _controller.text,
                           );
                       Navigator.of(context).pop();
@@ -80,12 +84,28 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
               onDetect: (capture) {
                 final List<Barcode> barcodes = capture.barcodes;
                 for (final barcode in barcodes) {
-                  debugPrint('Barcode found! ${barcode.rawValue}');
-                  setState(() => _data = barcode.rawValue);
-                  _focusNode.requestFocus();
+                  if (barcode.format == BarcodeFormat.qrCode) {
+                    log('Barcode found! ${barcode.type}-${barcode.rawValue}');
+                    setState(() => _data = barcode);
+                    _focusNode.requestFocus();
+                    break;
+                  }
                 }
               },
             ),
     );
   }
+}
+
+extension on BarcodeType {
+  QRCodeType toQRCodeType() => switch (this) {
+        BarcodeType.url => QRCodeType.url,
+        BarcodeType.contactInfo => QRCodeType.vCard,
+        BarcodeType.text => QRCodeType.text,
+        BarcodeType.email => QRCodeType.email,
+        BarcodeType.phone => QRCodeType.phone,
+        BarcodeType.sms => QRCodeType.sms,
+        BarcodeType.wifi => QRCodeType.wifi,
+        _ => QRCodeType.other,
+      };
 }
