@@ -1,8 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
-import 'package:qr_code_wallet/core/extensions/list_widget_extensions.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/features/settings/primary_color.dart';
 import 'package:qr_code_wallet/features/settings/state.dart';
@@ -47,14 +45,16 @@ class PrimaryColorSettings extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 8,
       children: [
         Text(
-          'Color',
+          context.l10n.settingsColorLabel,
           style: Theme.of(context).textTheme.titleSmall,
         ),
         Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: 8,
           children: PrimaryColor.values
               .map(
                 (pColor) => PrimaryColorButton(
@@ -63,10 +63,9 @@ class PrimaryColorSettings extends ConsumerWidget {
                   onTap: () => ref.read(primaryColorControllerProvider.notifier).set(pColor),
                 ),
               )
-              .toList()
-              .intersperse(const Gap(8)),
+              .toList(),
         ),
-      ].intersperse(const Gap(8)),
+      ],
     );
   }
 }
@@ -143,6 +142,7 @@ class Footer extends StatelessWidget {
         ),
         Row(
           mainAxisSize: MainAxisSize.min,
+          spacing: 8,
           children: [
             TextButton(
               onPressed: () => showLicensePage(
@@ -161,7 +161,7 @@ class Footer extends StatelessWidget {
               ),
               child: Text(context.l10n.settingsSourceCode),
             ),
-          ].intersperse(const Gap(8)),
+          ],
         ),
         _TextWithLink(
           text: '${context.l10n.settingsDataPrivacy1} ${context.l10n.settingsDataPrivacy2}',
