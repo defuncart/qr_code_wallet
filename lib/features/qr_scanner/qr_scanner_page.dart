@@ -46,7 +46,7 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
           ? Column(
               children: [
                 QRCodeWidget(
-                  data: _data!.rawValue ?? '',
+                  data: _data!.rawValue!,
                   size: 200.0,
                 ),
                 Expanded(
@@ -61,7 +61,7 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
                     onEditingComplete: () {
                       ref.read(codesDbProvider).addEntry(
                             type: _data!.type.toQRCodeType(),
-                            data: _data!.rawValue ?? '',
+                            data: _data!.rawValue!,
                             label: _controller.text,
                           );
                       Navigator.of(context).pop();
@@ -84,7 +84,7 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
               onDetect: (capture) {
                 final List<Barcode> barcodes = capture.barcodes;
                 for (final barcode in barcodes) {
-                  if (barcode.format == BarcodeFormat.qrCode) {
+                  if (barcode.format == BarcodeFormat.qrCode && barcode.rawValue != null) {
                     log('Barcode found! ${barcode.type}-${barcode.rawValue}');
                     setState(() => _data = barcode);
                     _focusNode.requestFocus();
