@@ -8,16 +8,16 @@ import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/core/widgets/qr_code_widget.dart';
 
-class QRScannerWidget extends ConsumerStatefulWidget {
+class QRScannerPage extends ConsumerStatefulWidget {
   static const path = '/scanner';
 
-  const QRScannerWidget({super.key});
+  const QRScannerPage({super.key});
 
   @override
-  ConsumerState<QRScannerWidget> createState() => _QRScannerWidgetState();
+  ConsumerState<QRScannerPage> createState() => _QRScannerWidgetState();
 }
 
-class _QRScannerWidgetState extends ConsumerState<QRScannerWidget> {
+class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
   Barcode? _data;
   late final TextEditingController _controller;
   late final FocusNode _focusNode;

@@ -5,7 +5,7 @@ import 'package:qr_code_wallet/core/db/models/qr_code.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/core/widgets/qr_code_widget.dart';
-import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_widget.dart';
+import 'package:qr_code_wallet/features/qr_scanner/qr_scanner_page.dart';
 import 'package:qr_code_wallet/features/settings/settings_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
       ),
       body: const HomePageContent(),
       floatingActionButton: FloatingActionButton.large(
-        onPressed: () => context.push(QRScannerWidget.path),
+        onPressed: () => context.push(QRScannerPage.path),
         child: const Icon(
           Icons.qr_code_scanner,
           color: Colors.white,
