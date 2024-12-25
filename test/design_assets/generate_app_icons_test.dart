@@ -37,7 +37,7 @@ class AppIcon extends StatelessWidget {
         child: Icon(
           Icons.qr_code,
           color: Colors.white,
-          size: size * 0.65,
+          size: size * 0.70,
         ),
       ),
     );

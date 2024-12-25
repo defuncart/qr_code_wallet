@@ -6,36 +6,82 @@ part 'qr_code.g.dart';
 class QRCode {
   const QRCode({
     required this.id,
-    required this.data,
+    required this.type,
     required this.label,
-    // this.title,
-    // this.recipients,
-    // this.status = Status.pending,
+    required this.data,
+    this.email,
+    this.phone,
+    this.sms,
+    this.wifi,
   });
 
   final int id;
-
-  final String data;
-
+  final QRCodeType type;
   final String label;
-
-  // @Index(type: IndexType.value)
-  // final String? title;
-
-  // final List<Recipient>? recipients;
-
-  // final Status status;
+  final String data;
+  final EmailQRCodeData? email;
+  final PhoneQRCodeData? phone;
+  final SMSQRCodeData? sms;
+  final WifiQRCodeData? wifi;
 }
 
-// @embedded
-// class Recipient {
-//   String? name;
+enum QRCodeType {
+  url,
+  vCard,
+  text,
+  email,
+  phone,
+  sms,
+  wifi,
+  other,
+}
 
-//   String? address;
-// }
+interface class QRCodeData {}
 
-// enum Status {
-//   draft,
-//   pending,
-//   sent,
-// }
+// url_launcher does not launch contact details, so ignore vCard for now
+
+@embedded
+class EmailQRCodeData implements QRCodeData {
+  EmailQRCodeData({
+    this.address,
+    this.subject,
+    this.body,
+  });
+
+  String? address;
+  String? subject;
+  String? body;
+}
+
+@embedded
+class PhoneQRCodeData implements QRCodeData {
+  PhoneQRCodeData({
+    this.phoneNumber,
+  });
+
+  String? phoneNumber;
+}
+
+@embedded
+class SMSQRCodeData implements QRCodeData {
+  SMSQRCodeData({
+    this.phoneNumber,
+    this.message,
+  });
+
+  String? phoneNumber;
+  String? message;
+}
+
+@embedded
+class WifiQRCodeData implements QRCodeData {
+  WifiQRCodeData({
+    this.ssid,
+    this.password,
+    this.encryption,
+  });
+
+  String? ssid;
+  String? password;
+  String? encryption;
+}
