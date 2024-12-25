@@ -16,21 +16,34 @@ class QRDBRepository {
 
   QRCode? get(int id) => _isar.qRCodes.get(id);
 
-  void addEntry({
+  int addEntry({
     required QRCodeType type,
-    required String data,
     required String label,
-  }) =>
-      _isar.write((isar) {
-        isar.qRCodes.put(
-          QRCode(
-            id: _isar.qRCodes.autoIncrement(),
-            type: type,
-            data: data,
-            label: label,
-          ),
-        );
-      });
+    required String data,
+    EmailQRCodeData? email,
+    PhoneQRCodeData? phone,
+    SMSQRCodeData? sms,
+    WifiQRCodeData? wifi,
+  }) {
+    final id = _isar.qRCodes.autoIncrement();
+
+    _isar.write((isar) {
+      isar.qRCodes.put(
+        QRCode(
+          id: id,
+          type: type,
+          label: label,
+          data: data,
+          email: email,
+          phone: phone,
+          sms: sms,
+          wifi: wifi,
+        ),
+      );
+    });
+
+    return id;
+  }
 
   void removeEntry(int id) => _isar.write((isar) {
         isar.qRCodes.delete(id);

@@ -13,7 +13,8 @@ String _$codesDbHash() => r'0d10f8a4ec61b9fce1d3ad11b235536e42716474';
 final codesDbProvider = Provider<QRDBRepository>.internal(
   codesDb,
   name: r'codesDbProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$codesDbHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$codesDbHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -28,7 +29,8 @@ String _$watchCodesHash() => r'692d3fbef39c027e79235562ad53efc53854c754';
 final watchCodesProvider = AutoDisposeStreamProvider<List<QRCode>>.internal(
   watchCodes,
   name: r'watchCodesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$watchCodesHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$watchCodesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -94,7 +96,8 @@ class GetQRCodeFamily extends Family<QRCode?> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'getQRCodeProvider';
@@ -112,7 +115,10 @@ class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
           ),
           from: getQRCodeProvider,
           name: r'getQRCodeProvider',
-          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getQRCodeHash,
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getQRCodeHash,
           dependencies: GetQRCodeFamily._dependencies,
           allTransitiveDependencies: GetQRCodeFamily._allTransitiveDependencies,
           id: id,
@@ -174,7 +180,8 @@ mixin GetQRCodeRef on AutoDisposeProviderRef<QRCode?> {
   int get id;
 }
 
-class _GetQRCodeProviderElement extends AutoDisposeProviderElement<QRCode?> with GetQRCodeRef {
+class _GetQRCodeProviderElement extends AutoDisposeProviderElement<QRCode?>
+    with GetQRCodeRef {
   _GetQRCodeProviderElement(super.provider);
 
   @override

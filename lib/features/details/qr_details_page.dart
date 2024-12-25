@@ -71,17 +71,8 @@ extension on QRCode {
 
   String get adjustedSchema {
     if (type == QRCodeType.email) {
-      // matmsg:TO:a@a.com;SUB:Title;BODY:Message;;
       // 'mailto:<email address>?subject=<subject>&body=<body>'
-      final regex = RegExp(r':TO:([\w-\.]+@([\w-]+\.)+[\w-]{2,4});SUB:(.+);BODY:(.+)');
-      final match = regex.allMatches(data);
-      if (match.isNotEmpty) {
-        final email = match.first.group(1);
-        final subject = match.first.group(3);
-        final body = match.first.group(4);
-
-        return 'mailto:$email?subject=$subject&body=$body';
-      }
+      return 'mailto:${email?.address ?? ''}?subject=${email?.subject ?? ''}&body=${email?.body ?? ''}';
     }
 
     return data;
