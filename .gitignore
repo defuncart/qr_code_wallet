@@ -50,5 +50,8 @@ macos/
 assets_dev/l10n/
 assets_dev/app_icons/
 
+# generated assets
+lib/core/l10n/generated
+
 # FVM Version Cache
 .fvm/
