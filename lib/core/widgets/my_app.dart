@@ -1,11 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:qr_code_wallet/core/l10n/generated/localizations.dart';
 import 'package:qr_code_wallet/core/l10n/l10n_extension.dart';
 import 'package:qr_code_wallet/core/state/state.dart';
 import 'package:qr_code_wallet/core/theme/theme.dart';
@@ -69,12 +68,7 @@ class _MyApp extends ConsumerWidget {
       routerConfig: _router,
       debugShowCheckedModeBanner: false,
       scrollBehavior: const _AppScrollBehavior(),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: LightTheme.generate(primaryColor: color),
       darkTheme: DarkTheme.generate(primaryColor: color),
@@ -85,23 +79,12 @@ class _MyApp extends ConsumerWidget {
 
 final _router = GoRouter(
   routes: [
-    GoRoute(
-      path: HomePage.path,
-      builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: SettingsPage.path,
-      builder: (context, state) => const SettingsPage(),
-    ),
-    GoRoute(
-      path: QRScannerPage.path,
-      builder: (context, state) => const QRScannerPage(),
-    ),
+    GoRoute(path: HomePage.path, builder: (context, state) => const HomePage()),
+    GoRoute(path: SettingsPage.path, builder: (context, state) => const SettingsPage()),
+    GoRoute(path: QRScannerPage.path, builder: (context, state) => const QRScannerPage()),
     GoRoute(
       path: QRDetailsPage.path,
-      builder: (context, state) => QRDetailsPage(
-        id: int.tryParse(state.pathParameters['id']!)!,
-      ),
+      builder: (context, state) => QRDetailsPage(id: int.tryParse(state.pathParameters['id']!)!),
     ),
   ],
 );
@@ -110,8 +93,5 @@ class _AppScrollBehavior extends MaterialScrollBehavior {
   const _AppScrollBehavior();
 
   @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
+  Set<PointerDeviceKind> get dragDevices => {PointerDeviceKind.touch, PointerDeviceKind.mouse};
 }

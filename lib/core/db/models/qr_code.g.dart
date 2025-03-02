@@ -23,16 +23,7 @@ const QRCodeSchema = IsarGeneratedSchema(
       IsarPropertySchema(
         name: 'type',
         type: IsarType.byte,
-        enumMap: {
-          "url": 0,
-          "vCard": 1,
-          "text": 2,
-          "email": 3,
-          "phone": 4,
-          "sms": 5,
-          "wifi": 6,
-          "other": 7
-        },
+        enumMap: {"url": 0, "vCard": 1, "text": 2, "email": 3, "phone": 4, "sms": 5, "wifi": 6, "other": 7},
       ),
       IsarPropertySchema(
         name: 'label',
@@ -70,12 +61,7 @@ const QRCodeSchema = IsarGeneratedSchema(
     deserialize: deserializeQRCode,
     deserializeProperty: deserializeQRCodeProp,
   ),
-  embeddedSchemas: [
-    EmailQRCodeDataSchema,
-    PhoneQRCodeDataSchema,
-    SMSQRCodeDataSchema,
-    WifiQRCodeDataSchema
-  ],
+  embeddedSchemas: [EmailQRCodeDataSchema, PhoneQRCodeDataSchema, SMSQRCodeDataSchema, WifiQRCodeDataSchema],
 );
 
 @isarProtected
@@ -391,10 +377,8 @@ class _QRCodeQueryBuilderUpdateImpl implements _QRCodeQueryUpdate {
   }
 }
 
-extension QRCodeQueryBuilderUpdate
-    on QueryBuilder<QRCode, QRCode, QOperations> {
-  _QRCodeQueryUpdate get updateFirst =>
-      _QRCodeQueryBuilderUpdateImpl(this, limit: 1);
+extension QRCodeQueryBuilderUpdate on QueryBuilder<QRCode, QRCode, QOperations> {
+  _QRCodeQueryUpdate get updateFirst => _QRCodeQueryBuilderUpdateImpl(this, limit: 1);
 
   _QRCodeQueryUpdate get updateAll => _QRCodeQueryBuilderUpdateImpl(this);
 }
@@ -693,9 +677,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> labelContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> labelContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -707,9 +689,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> labelMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> labelMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -865,8 +845,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> dataContains(String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> dataContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -878,9 +857,7 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> dataMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> dataMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -964,29 +941,25 @@ extension QRCodeQueryFilter on QueryBuilder<QRCode, QRCode, QFilterCondition> {
 }
 
 extension QRCodeQueryObject on QueryBuilder<QRCode, QRCode, QFilterCondition> {
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> email(
-      FilterQuery<EmailQRCodeData> q) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> email(FilterQuery<EmailQRCodeData> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, 4);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> phone(
-      FilterQuery<PhoneQRCodeData> q) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> phone(FilterQuery<PhoneQRCodeData> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, 5);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> sms(
-      FilterQuery<SMSQRCodeData> q) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> sms(FilterQuery<SMSQRCodeData> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, 6);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> wifi(
-      FilterQuery<WifiQRCodeData> q) {
+  QueryBuilder<QRCode, QRCode, QAfterFilterCondition> wifi(FilterQuery<WifiQRCodeData> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, 7);
     });
@@ -1018,8 +991,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByLabel(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByLabel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
         2,
@@ -1028,8 +1000,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByLabelDesc(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByLabelDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
         2,
@@ -1039,8 +1010,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByData(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByData({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
         3,
@@ -1049,8 +1019,7 @@ extension QRCodeQuerySortBy on QueryBuilder<QRCode, QRCode, QSortBy> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByDataDesc(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> sortByDataDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(
         3,
@@ -1086,29 +1055,25 @@ extension QRCodeQuerySortThenBy on QueryBuilder<QRCode, QRCode, QSortThenBy> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabel(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(2, caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabelDesc(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByLabelDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(2, sort: Sort.desc, caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByData(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByData({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(3, caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByDataDesc(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterSortBy> thenByDataDesc({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(3, sort: Sort.desc, caseSensitive: caseSensitive);
     });
@@ -1122,15 +1087,13 @@ extension QRCodeQueryWhereDistinct on QueryBuilder<QRCode, QRCode, QDistinct> {
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByLabel(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByLabel({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(2, caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByData(
-      {bool caseSensitive = true}) {
+  QueryBuilder<QRCode, QRCode, QAfterDistinct> distinctByData({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(3, caseSensitive: caseSensitive);
     });
@@ -1237,8 +1200,7 @@ extension QRCodeQueryProperty2<R> on QueryBuilder<QRCode, R, QAfterProperty> {
   }
 }
 
-extension QRCodeQueryProperty3<R1, R2>
-    on QueryBuilder<QRCode, (R1, R2), QAfterProperty> {
+extension QRCodeQueryProperty3<R1, R2> on QueryBuilder<QRCode, (R1, R2), QAfterProperty> {
   QueryBuilder<QRCode, (R1, R2, int), QOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(0);
@@ -1263,15 +1225,13 @@ extension QRCodeQueryProperty3<R1, R2>
     });
   }
 
-  QueryBuilder<QRCode, (R1, R2, EmailQRCodeData?), QOperations>
-      emailProperty() {
+  QueryBuilder<QRCode, (R1, R2, EmailQRCodeData?), QOperations> emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(4);
     });
   }
 
-  QueryBuilder<QRCode, (R1, R2, PhoneQRCodeData?), QOperations>
-      phoneProperty() {
+  QueryBuilder<QRCode, (R1, R2, PhoneQRCodeData?), QOperations> phoneProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addProperty(5);
     });
@@ -1369,24 +1329,20 @@ EmailQRCodeData deserializeEmailQRCodeData(IsarReader reader) {
   return object;
 }
 
-extension EmailQRCodeDataQueryFilter
-    on QueryBuilder<EmailQRCodeData, EmailQRCodeData, QFilterCondition> {
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressIsNull() {
+extension EmailQRCodeDataQueryFilter on QueryBuilder<EmailQRCodeData, EmailQRCodeData, QFilterCondition> {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressIsNotNull() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1401,8 +1357,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressGreaterThan(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1417,8 +1372,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressGreaterThanOrEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1433,8 +1387,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressLessThan(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1449,8 +1402,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressLessThanOrEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1465,8 +1417,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressBetween(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -1483,8 +1434,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressStartsWith(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1499,8 +1449,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressEndsWith(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1515,8 +1464,8 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -1528,8 +1477,8 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -1541,8 +1490,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressIsEmpty() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -1553,8 +1501,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      addressIsNotEmpty() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> addressIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -1565,22 +1512,19 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectIsNull() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectIsNotNull() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1595,8 +1539,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectGreaterThan(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1611,8 +1554,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectGreaterThanOrEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1627,8 +1569,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectLessThan(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1643,8 +1584,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectLessThanOrEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1659,8 +1599,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectBetween(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -1677,8 +1616,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectStartsWith(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1693,8 +1631,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectEndsWith(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1709,8 +1646,8 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -1722,8 +1659,8 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -1735,8 +1672,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectIsEmpty() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -1747,8 +1683,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      subjectIsNotEmpty() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> subjectIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -1759,22 +1694,19 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyIsNull() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 3));
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyIsNotNull() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 3));
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1789,8 +1721,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyGreaterThan(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1805,8 +1736,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyGreaterThanOrEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1821,8 +1751,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyLessThan(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1837,8 +1766,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyLessThanOrEqualTo(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1853,8 +1781,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyBetween(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -1871,8 +1798,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyStartsWith(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1887,8 +1813,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyEndsWith(
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1903,8 +1828,8 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -1916,8 +1841,8 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -1929,8 +1854,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyIsEmpty() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -1941,8 +1865,7 @@ extension EmailQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition>
-      bodyIsNotEmpty() {
+  QueryBuilder<EmailQRCodeData, EmailQRCodeData, QAfterFilterCondition> bodyIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -1954,8 +1877,7 @@ extension EmailQRCodeDataQueryFilter
   }
 }
 
-extension EmailQRCodeDataQueryObject
-    on QueryBuilder<EmailQRCodeData, EmailQRCodeData, QFilterCondition> {}
+extension EmailQRCodeDataQueryObject on QueryBuilder<EmailQRCodeData, EmailQRCodeData, QFilterCondition> {}
 
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, invalid_use_of_protected_member, lines_longer_than_80_chars, constant_identifier_names, avoid_js_rounded_ints, no_leading_underscores_for_local_identifiers, require_trailing_commas, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_in_if_null_operators, library_private_types_in_public_api, prefer_const_constructors
@@ -2002,24 +1924,20 @@ PhoneQRCodeData deserializePhoneQRCodeData(IsarReader reader) {
   return object;
 }
 
-extension PhoneQRCodeDataQueryFilter
-    on QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QFilterCondition> {
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberIsNull() {
+extension PhoneQRCodeDataQueryFilter on QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QFilterCondition> {
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberIsNotNull() {
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberEqualTo(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2034,8 +1952,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberGreaterThan(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2050,8 +1967,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberGreaterThanOrEqualTo(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2066,8 +1982,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberLessThan(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2082,8 +1997,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberLessThanOrEqualTo(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2098,8 +2012,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberBetween(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -2116,8 +2029,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberStartsWith(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2132,8 +2044,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberEndsWith(
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2148,8 +2059,8 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -2161,8 +2072,8 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -2174,8 +2085,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberIsEmpty() {
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -2186,8 +2096,7 @@ extension PhoneQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition>
-      phoneNumberIsNotEmpty() {
+  QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QAfterFilterCondition> phoneNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -2199,8 +2108,7 @@ extension PhoneQRCodeDataQueryFilter
   }
 }
 
-extension PhoneQRCodeDataQueryObject
-    on QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QFilterCondition> {}
+extension PhoneQRCodeDataQueryObject on QueryBuilder<PhoneQRCodeData, PhoneQRCodeData, QFilterCondition> {}
 
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, invalid_use_of_protected_member, lines_longer_than_80_chars, constant_identifier_names, avoid_js_rounded_ints, no_leading_underscores_for_local_identifiers, require_trailing_commas, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_in_if_null_operators, library_private_types_in_public_api, prefer_const_constructors
@@ -2262,24 +2170,20 @@ SMSQRCodeData deserializeSMSQRCodeData(IsarReader reader) {
   return object;
 }
 
-extension SMSQRCodeDataQueryFilter
-    on QueryBuilder<SMSQRCodeData, SMSQRCodeData, QFilterCondition> {
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberIsNull() {
+extension SMSQRCodeDataQueryFilter on QueryBuilder<SMSQRCodeData, SMSQRCodeData, QFilterCondition> {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberIsNotNull() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberEqualTo(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2294,8 +2198,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberGreaterThan(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2310,8 +2213,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberGreaterThanOrEqualTo(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2326,8 +2228,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberLessThan(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2342,8 +2243,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberLessThanOrEqualTo(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2358,8 +2258,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberBetween(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -2376,8 +2275,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberStartsWith(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2392,8 +2290,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberEndsWith(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2408,8 +2305,8 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -2421,8 +2318,8 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -2434,8 +2331,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberIsEmpty() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -2446,8 +2342,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      phoneNumberIsNotEmpty() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> phoneNumberIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -2458,22 +2353,19 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageIsNull() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageIsNotNull() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageEqualTo(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2488,8 +2380,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageGreaterThan(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2504,8 +2395,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageGreaterThanOrEqualTo(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2520,8 +2410,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageLessThan(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2536,8 +2425,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageLessThanOrEqualTo(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2552,8 +2440,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageBetween(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -2570,8 +2457,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageStartsWith(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2586,8 +2472,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageEndsWith(
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2602,8 +2487,8 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -2615,8 +2500,8 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -2628,8 +2513,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageIsEmpty() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -2640,8 +2524,7 @@ extension SMSQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition>
-      messageIsNotEmpty() {
+  QueryBuilder<SMSQRCodeData, SMSQRCodeData, QAfterFilterCondition> messageIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -2653,8 +2536,7 @@ extension SMSQRCodeDataQueryFilter
   }
 }
 
-extension SMSQRCodeDataQueryObject
-    on QueryBuilder<SMSQRCodeData, SMSQRCodeData, QFilterCondition> {}
+extension SMSQRCodeDataQueryObject on QueryBuilder<SMSQRCodeData, SMSQRCodeData, QFilterCondition> {}
 
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, invalid_use_of_protected_member, lines_longer_than_80_chars, constant_identifier_names, avoid_js_rounded_ints, no_leading_underscores_for_local_identifiers, require_trailing_commas, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_in_if_null_operators, library_private_types_in_public_api, prefer_const_constructors
@@ -2731,24 +2613,20 @@ WifiQRCodeData deserializeWifiQRCodeData(IsarReader reader) {
   return object;
 }
 
-extension WifiQRCodeDataQueryFilter
-    on QueryBuilder<WifiQRCodeData, WifiQRCodeData, QFilterCondition> {
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidIsNull() {
+extension WifiQRCodeDataQueryFilter on QueryBuilder<WifiQRCodeData, WifiQRCodeData, QFilterCondition> {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidIsNotNull() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2763,8 +2641,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidGreaterThan(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2779,8 +2656,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidGreaterThanOrEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2795,8 +2671,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidLessThan(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2811,8 +2686,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidLessThanOrEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2827,8 +2701,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidBetween(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -2845,8 +2718,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidStartsWith(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2861,8 +2733,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidEndsWith(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2877,8 +2748,8 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -2890,8 +2761,8 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -2903,8 +2774,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidIsEmpty() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -2915,8 +2785,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      ssidIsNotEmpty() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> ssidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -2927,22 +2796,19 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordIsNull() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordIsNotNull() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2957,8 +2823,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordGreaterThan(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2973,8 +2838,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordGreaterThanOrEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -2989,8 +2853,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordLessThan(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3005,8 +2868,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordLessThanOrEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3021,8 +2883,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordBetween(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -3039,8 +2900,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordStartsWith(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -3055,8 +2915,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordEndsWith(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -3071,8 +2930,8 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -3084,8 +2943,8 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -3097,8 +2956,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordIsEmpty() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -3109,8 +2967,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      passwordIsNotEmpty() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> passwordIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -3121,22 +2978,19 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionIsNull() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const IsNullCondition(property: 3));
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionIsNotNull() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionIsNotNull() {
     return QueryBuilder.apply(not(), (query) {
       return query.addFilterCondition(const IsNullCondition(property: 3));
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3151,8 +3005,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionGreaterThan(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionGreaterThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3167,8 +3020,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionGreaterThanOrEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionGreaterThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3183,8 +3035,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionLessThan(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionLessThan(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3199,8 +3050,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionLessThanOrEqualTo(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionLessThanOrEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -3215,8 +3065,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionBetween(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -3233,8 +3082,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionStartsWith(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -3249,8 +3097,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionEndsWith(
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -3265,8 +3112,8 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         ContainsCondition(
@@ -3278,8 +3125,8 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         MatchesCondition(
@@ -3291,8 +3138,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionIsEmpty() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const EqualCondition(
@@ -3303,8 +3149,7 @@ extension WifiQRCodeDataQueryFilter
     });
   }
 
-  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition>
-      encryptionIsNotEmpty() {
+  QueryBuilder<WifiQRCodeData, WifiQRCodeData, QAfterFilterCondition> encryptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const GreaterCondition(
@@ -3316,5 +3161,4 @@ extension WifiQRCodeDataQueryFilter
   }
 }
 
-extension WifiQRCodeDataQueryObject
-    on QueryBuilder<WifiQRCodeData, WifiQRCodeData, QFilterCondition> {}
+extension WifiQRCodeDataQueryObject on QueryBuilder<WifiQRCodeData, WifiQRCodeData, QFilterCondition> {}
