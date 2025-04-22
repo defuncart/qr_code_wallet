@@ -25,16 +25,7 @@ class QRCode {
   final WifiQRCodeData? wifi;
 }
 
-enum QRCodeType {
-  url,
-  vCard,
-  text,
-  email,
-  phone,
-  sms,
-  wifi,
-  other,
-}
+enum QRCodeType { url, vCard, text, email, phone, sms, wifi, other }
 
 interface class QRCodeData {}
 
@@ -42,11 +33,7 @@ interface class QRCodeData {}
 
 @embedded
 class EmailQRCodeData implements QRCodeData {
-  EmailQRCodeData({
-    this.address,
-    this.subject,
-    this.body,
-  });
+  EmailQRCodeData({this.address, this.subject, this.body});
 
   String? address;
   String? subject;
@@ -55,19 +42,14 @@ class EmailQRCodeData implements QRCodeData {
 
 @embedded
 class PhoneQRCodeData implements QRCodeData {
-  PhoneQRCodeData({
-    this.phoneNumber,
-  });
+  PhoneQRCodeData({this.phoneNumber});
 
   String? phoneNumber;
 }
 
 @embedded
 class SMSQRCodeData implements QRCodeData {
-  SMSQRCodeData({
-    this.phoneNumber,
-    this.message,
-  });
+  SMSQRCodeData({this.phoneNumber, this.message});
 
   String? phoneNumber;
   String? message;
@@ -75,11 +57,7 @@ class SMSQRCodeData implements QRCodeData {
 
 @embedded
 class WifiQRCodeData implements QRCodeData {
-  WifiQRCodeData({
-    this.ssid,
-    this.password,
-    this.encryption,
-  });
+  WifiQRCodeData({this.ssid, this.password, this.encryption});
 
   String? ssid;
   String? password;

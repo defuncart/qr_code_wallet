@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeWidget extends StatelessWidget {
-  const QRCodeWidget({
-    super.key,
-    required this.data,
-    this.size,
-    this.backgroundColor,
-    this.foregroundColor,
-  });
+  const QRCodeWidget({super.key, required this.data, this.size, this.backgroundColor, this.foregroundColor});
 
   final String data;
   final double? size;

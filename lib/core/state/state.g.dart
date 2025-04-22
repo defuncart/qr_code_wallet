@@ -69,21 +69,13 @@ class GetQRCodeFamily extends Family<QRCode?> {
   const GetQRCodeFamily();
 
   /// See also [getQRCode].
-  GetQRCodeProvider call({
-    required int id,
-  }) {
-    return GetQRCodeProvider(
-      id: id,
-    );
+  GetQRCodeProvider call({required int id}) {
+    return GetQRCodeProvider(id: id);
   }
 
   @override
-  GetQRCodeProvider getProviderOverride(
-    covariant GetQRCodeProvider provider,
-  ) {
-    return call(
-      id: provider.id,
-    );
+  GetQRCodeProvider getProviderOverride(covariant GetQRCodeProvider provider) {
+    return call(id: provider.id);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -103,20 +95,16 @@ class GetQRCodeFamily extends Family<QRCode?> {
 /// See also [getQRCode].
 class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
   /// See also [getQRCode].
-  GetQRCodeProvider({
-    required int id,
-  }) : this._internal(
-          (ref) => getQRCode(
-            ref as GetQRCodeRef,
-            id: id,
-          ),
-          from: getQRCodeProvider,
-          name: r'getQRCodeProvider',
-          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getQRCodeHash,
-          dependencies: GetQRCodeFamily._dependencies,
-          allTransitiveDependencies: GetQRCodeFamily._allTransitiveDependencies,
-          id: id,
-        );
+  GetQRCodeProvider({required int id})
+    : this._internal(
+        (ref) => getQRCode(ref as GetQRCodeRef, id: id),
+        from: getQRCodeProvider,
+        name: r'getQRCodeProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getQRCodeHash,
+        dependencies: GetQRCodeFamily._dependencies,
+        allTransitiveDependencies: GetQRCodeFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   GetQRCodeProvider._internal(
     super._createNotifier, {
@@ -131,9 +119,7 @@ class GetQRCodeProvider extends AutoDisposeProvider<QRCode?> {
   final int id;
 
   @override
-  Override overrideWith(
-    QRCode? Function(GetQRCodeRef provider) create,
-  ) {
+  Override overrideWith(QRCode? Function(GetQRCodeRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: GetQRCodeProvider._internal(
@@ -180,5 +166,6 @@ class _GetQRCodeProviderElement extends AutoDisposeProviderElement<QRCode?> with
   @override
   int get id => (origin as GetQRCodeProvider).id;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -12,8 +12,4 @@ QRDBRepository codesDb(Ref ref) => QRDBRepository();
 Stream<List<QRCode>> watchCodes(Ref ref) => ref.read(codesDbProvider).watch();
 
 @riverpod
-QRCode? getQRCode(
-  Ref ref, {
-  required int id,
-}) =>
-    ref.read(codesDbProvider).get(id);
+QRCode? getQRCode(Ref ref, {required int id}) => ref.read(codesDbProvider).get(id);

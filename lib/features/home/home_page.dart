@@ -18,21 +18,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.appTitle),
-        actions: [
-          IconButton(
-            onPressed: () => context.push(SettingsPage.path),
-            icon: const Icon(Icons.settings),
-          ),
-        ],
+        actions: [IconButton(onPressed: () => context.push(SettingsPage.path), icon: const Icon(Icons.settings))],
       ),
       body: const HomePageContent(),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () => context.push(QRScannerPage.path),
-        child: const Icon(
-          Icons.qr_code_scanner,
-          color: Colors.white,
-          size: 64,
-        ),
+        child: const Icon(Icons.qr_code_scanner, color: Colors.white, size: 64),
       ),
     );
   }
@@ -47,17 +38,18 @@ class HomePageContent extends ConsumerWidget {
     final codes = ref.watch(watchCodesProvider);
 
     return codes.maybeMap(
-      data: (data) => data.value.isEmpty
-          ? Center(
-              child: Text(context.l10n.homeNoSavedCodes),
-            )
-          : ListView.builder(
-              itemCount: data.value.length,
-              itemBuilder: (context, index) => QRTile(
-                qrCode: data.value[index],
-                onDismiss: () => ref.read(codesDbProvider).removeEntry(data.value[index].id),
-              ),
-            ),
+      data:
+          (data) =>
+              data.value.isEmpty
+                  ? Center(child: Text(context.l10n.homeNoSavedCodes))
+                  : ListView.builder(
+                    itemCount: data.value.length,
+                    itemBuilder:
+                        (context, index) => QRTile(
+                          qrCode: data.value[index],
+                          onDismiss: () => ref.read(codesDbProvider).removeEntry(data.value[index].id),
+                        ),
+                  ),
       orElse: () => const SizedBox.shrink(),
     );
   }
@@ -65,11 +57,7 @@ class HomePageContent extends ConsumerWidget {
 
 @visibleForTesting
 class QRTile extends StatelessWidget {
-  const QRTile({
-    super.key,
-    required this.qrCode,
-    required this.onDismiss,
-  });
+  const QRTile({super.key, required this.qrCode, required this.onDismiss});
 
   final QRCode qrCode;
   final VoidCallback onDismiss;
@@ -78,25 +66,13 @@ class QRTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key('qrCode-${qrCode.id}'),
-      background: const ColoredBox(
-        color: Colors.red,
-        child: Icon(
-          Icons.delete,
-          color: Colors.white,
-        ),
-      ),
+      background: const ColoredBox(color: Colors.red, child: Icon(Icons.delete, color: Colors.white)),
       direction: DismissDirection.endToStart,
       onDismissed: (_) => onDismiss(),
       child: ListTile(
-        leading: QRCodeWidget(
-          data: qrCode.data,
-          size: 48,
-          backgroundColor: Colors.transparent,
-        ),
+        leading: QRCodeWidget(data: qrCode.data, size: 48, backgroundColor: Colors.transparent),
         title: Text(qrCode.label),
-        onTap: () => context.push(
-          '/details/${qrCode.id}',
-        ),
+        onTap: () => context.push('/details/${qrCode.id}'),
       ),
     );
   }

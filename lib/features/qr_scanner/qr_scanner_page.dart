@@ -23,62 +23,61 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.scannerTitle),
-      ),
-      body: _data != null
-          ? const SizedBox()
-          : QRCodeScanner(
-              onCodeScanned: (data) {
-                if (_data == null) {
-                  setState(() {
-                    _data = data;
-                  });
+      appBar: AppBar(title: Text(context.l10n.scannerTitle)),
+      body:
+          _data != null
+              ? const SizedBox()
+              : QRCodeScanner(
+                onCodeScanned: (data) {
+                  if (_data == null) {
+                    setState(() {
+                      _data = data;
+                    });
 
-                  final label = _generatedLabelForData(data);
-                  final id = ref.read(codesDbProvider).addEntry(
-                        type: data.type,
-                        data: data.rawValue,
-                        label: label,
-                        email: data.email,
-                        phone: data.phone,
-                        sms: data.sms,
-                        wifi: data.wifi,
-                      );
+                    final label = _generatedLabelForData(data);
+                    final id = ref
+                        .read(codesDbProvider)
+                        .addEntry(
+                          type: data.type,
+                          data: data.rawValue,
+                          label: label,
+                          email: data.email,
+                          phone: data.phone,
+                          sms: data.sms,
+                          wifi: data.wifi,
+                        );
 
-                  context.replace('/details/$id');
-                }
-              },
-            ),
+                    context.replace('/details/$id');
+                  }
+                },
+              ),
     );
   }
 
   String _generatedLabelForData(ScannedCode data) => switch (data.type) {
-        QRCodeType.url => data.rawValue,
-        QRCodeType.vCard => 'vCard',
-        QRCodeType.text => data.rawValue,
-        QRCodeType.email => 'email: ${data.email?.address} - ${data.email?.subject}',
-        QRCodeType.phone => 'phone: ${data.phone?.phoneNumber}',
-        QRCodeType.sms => 'sms: ${data.sms?.phoneNumber}',
-        QRCodeType.wifi => 'wifi: ${data.wifi?.ssid}',
-        QRCodeType.other => data.rawValue,
-      };
+    QRCodeType.url => data.rawValue,
+    QRCodeType.vCard => 'vCard',
+    QRCodeType.text => data.rawValue,
+    QRCodeType.email => 'email: ${data.email?.address} - ${data.email?.subject}',
+    QRCodeType.phone => 'phone: ${data.phone?.phoneNumber}',
+    QRCodeType.sms => 'sms: ${data.sms?.phoneNumber}',
+    QRCodeType.wifi => 'wifi: ${data.wifi?.ssid}',
+    QRCodeType.other => data.rawValue,
+  };
 }
 
-typedef ScannedCode = ({
-  String rawValue,
-  QRCodeType type,
-  EmailQRCodeData? email,
-  PhoneQRCodeData? phone,
-  SMSQRCodeData? sms,
-  WifiQRCodeData? wifi,
-});
+typedef ScannedCode =
+    ({
+      String rawValue,
+      QRCodeType type,
+      EmailQRCodeData? email,
+      PhoneQRCodeData? phone,
+      SMSQRCodeData? sms,
+      WifiQRCodeData? wifi,
+    });
 
 class QRCodeScanner extends StatelessWidget {
-  const QRCodeScanner({
-    super.key,
-    required this.onCodeScanned,
-  });
+  const QRCodeScanner({super.key, required this.onCodeScanned});
 
   final void Function(ScannedCode) onCodeScanned;
 
@@ -92,25 +91,21 @@ class QRCodeScanner extends StatelessWidget {
         torchEnabled: false,
         formats: [BarcodeFormat.qrCode],
       ),
-      placeholderBuilder: (context, _) => ColoredBox(
-        color: Theme.of(context).scaffoldBackgroundColor,
-      ),
+      placeholderBuilder: (context, _) => ColoredBox(color: Theme.of(context).scaffoldBackgroundColor),
       onDetect: (capture) {
         final barcodes = capture.barcodes;
         for (final barcode in barcodes) {
           if (barcode.format == BarcodeFormat.qrCode && barcode.rawValue != null) {
             log('Barcode found! ${barcode.type}-${barcode.rawValue}');
 
-            onCodeScanned(
-              (
-                rawValue: barcode.rawValue!,
-                type: barcode.type.toQRCodeType(),
-                email: barcode.toEmail(),
-                phone: barcode.toPhone(),
-                sms: barcode.toSMS(),
-                wifi: barcode.toWifi(),
-              ),
-            );
+            onCodeScanned((
+              rawValue: barcode.rawValue!,
+              type: barcode.type.toQRCodeType(),
+              email: barcode.toEmail(),
+              phone: barcode.toPhone(),
+              sms: barcode.toSMS(),
+              wifi: barcode.toWifi(),
+            ));
             break;
           }
         }
@@ -121,36 +116,24 @@ class QRCodeScanner extends StatelessWidget {
 
 extension on BarcodeType {
   QRCodeType toQRCodeType() => switch (this) {
-        BarcodeType.url => QRCodeType.url,
-        BarcodeType.contactInfo => QRCodeType.vCard,
-        BarcodeType.text => QRCodeType.text,
-        BarcodeType.email => QRCodeType.email,
-        BarcodeType.phone => QRCodeType.phone,
-        BarcodeType.sms => QRCodeType.sms,
-        BarcodeType.wifi => QRCodeType.wifi,
-        _ => QRCodeType.other,
-      };
+    BarcodeType.url => QRCodeType.url,
+    BarcodeType.contactInfo => QRCodeType.vCard,
+    BarcodeType.text => QRCodeType.text,
+    BarcodeType.email => QRCodeType.email,
+    BarcodeType.phone => QRCodeType.phone,
+    BarcodeType.sms => QRCodeType.sms,
+    BarcodeType.wifi => QRCodeType.wifi,
+    _ => QRCodeType.other,
+  };
 }
 
 extension on Barcode {
-  EmailQRCodeData? toEmail() => EmailQRCodeData(
-        address: email?.address,
-        subject: email?.subject,
-        body: email?.body,
-      );
+  EmailQRCodeData? toEmail() => EmailQRCodeData(address: email?.address, subject: email?.subject, body: email?.body);
 
-  PhoneQRCodeData? toPhone() => PhoneQRCodeData(
-        phoneNumber: phone?.number,
-      );
+  PhoneQRCodeData? toPhone() => PhoneQRCodeData(phoneNumber: phone?.number);
 
-  SMSQRCodeData? toSMS() => SMSQRCodeData(
-        phoneNumber: sms?.phoneNumber,
-        message: sms?.message,
-      );
+  SMSQRCodeData? toSMS() => SMSQRCodeData(phoneNumber: sms?.phoneNumber, message: sms?.message);
 
-  WifiQRCodeData? toWifi() => WifiQRCodeData(
-        ssid: wifi?.ssid,
-        password: wifi?.password,
-        encryption: wifi?.encryptionType.name,
-      );
+  WifiQRCodeData? toWifi() =>
+      WifiQRCodeData(ssid: wifi?.ssid, password: wifi?.password, encryption: wifi?.encryptionType.name);
 }

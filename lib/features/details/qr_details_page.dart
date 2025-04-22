@@ -10,10 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 class QRDetailsPage extends ConsumerWidget {
   static const path = '/details/:id';
 
-  const QRDetailsPage({
-    super.key,
-    required this.id,
-  });
+  const QRDetailsPage({super.key, required this.id});
 
   final int id;
 
@@ -22,15 +19,11 @@ class QRDetailsPage extends ConsumerWidget {
     final qrCode = ref.watch(getQRCodeProvider(id: id));
 
     if (qrCode == null) {
-      return Scaffold(
-        appBar: AppBar(),
-      );
+      return Scaffold(appBar: AppBar());
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(qrCode.label),
-      ),
+      appBar: AppBar(title: Text(qrCode.label)),
       body: Column(
         children: [
           QRCodeWidget(data: qrCode.data),
@@ -39,19 +32,13 @@ class QRDetailsPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             spacing: qrCode.canLaunch ? 32 : 48,
             children: [
-              IconButton(
-                onPressed: () => Share.share(qrCode.data),
-                icon: const Icon(Icons.share),
-              ),
+              IconButton(onPressed: () => Share.share(qrCode.data), icon: const Icon(Icons.share)),
               IconButton(
                 onPressed: () => Clipboard.setData(ClipboardData(text: qrCode.data)),
                 icon: const Icon(Icons.copy),
               ),
               if (qrCode.canLaunch)
-                IconButton(
-                  onPressed: () => launchUrl(Uri.parse(qrCode.adjustedSchema)),
-                  icon: Icon(qrCode.icon),
-                ),
+                IconButton(onPressed: () => launchUrl(Uri.parse(qrCode.adjustedSchema)), icon: Icon(qrCode.icon)),
             ],
           ),
         ],
@@ -62,12 +49,12 @@ class QRDetailsPage extends ConsumerWidget {
 
 extension on QRCode {
   bool get canLaunch => switch (type) {
-        QRCodeType.url => true,
-        QRCodeType.email => true,
-        QRCodeType.sms => true,
-        QRCodeType.phone => true,
-        _ => false,
-      };
+    QRCodeType.url => true,
+    QRCodeType.email => true,
+    QRCodeType.sms => true,
+    QRCodeType.phone => true,
+    _ => false,
+  };
 
   String get adjustedSchema {
     if (type == QRCodeType.email) {
@@ -79,10 +66,10 @@ extension on QRCode {
   }
 
   IconData get icon => switch (type) {
-        QRCodeType.url => Icons.open_in_browser,
-        QRCodeType.email => Icons.email,
-        QRCodeType.sms => Icons.sms,
-        QRCodeType.phone => Icons.phone,
-        _ => throw ArgumentError(),
-      };
+    QRCodeType.url => Icons.open_in_browser,
+    QRCodeType.email => Icons.email,
+    QRCodeType.sms => Icons.sms,
+    QRCodeType.phone => Icons.phone,
+    _ => throw ArgumentError(),
+  };
 }

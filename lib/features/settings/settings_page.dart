@@ -14,20 +14,13 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.settingsPageTitle),
-      ),
+      appBar: AppBar(title: Text(context.l10n.settingsPageTitle)),
       body: const Padding(
         padding: EdgeInsets.all(8),
         child: Column(
           children: [
-            Expanded(
-              child: PrimaryColorSettings(),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Footer(),
-            ),
+            Expanded(child: PrimaryColorSettings()),
+            Align(alignment: Alignment.bottomCenter, child: Footer()),
           ],
         ),
       ),
@@ -47,23 +40,21 @@ class PrimaryColorSettings extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,
       children: [
-        Text(
-          context.l10n.settingsColorLabel,
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
+        Text(context.l10n.settingsColorLabel, style: Theme.of(context).textTheme.titleSmall),
         Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           spacing: 8,
-          children: PrimaryColor.values
-              .map(
-                (pColor) => PrimaryColorButton(
-                  primaryColor: pColor,
-                  isSelected: primaryColor == pColor,
-                  onTap: () => ref.read(primaryColorControllerProvider.notifier).set(pColor),
-                ),
-              )
-              .toList(),
+          children:
+              PrimaryColor.values
+                  .map(
+                    (pColor) => PrimaryColorButton(
+                      primaryColor: pColor,
+                      isSelected: primaryColor == pColor,
+                      onTap: () => ref.read(primaryColorControllerProvider.notifier).set(pColor),
+                    ),
+                  )
+                  .toList(),
         ),
       ],
     );
@@ -71,12 +62,7 @@ class PrimaryColorSettings extends ConsumerWidget {
 }
 
 class PrimaryColorButton extends StatelessWidget {
-  const PrimaryColorButton({
-    super.key,
-    required this.primaryColor,
-    required this.isSelected,
-    required this.onTap,
-  });
+  const PrimaryColorButton({super.key, required this.primaryColor, required this.isSelected, required this.onTap});
 
   final PrimaryColor primaryColor;
   final bool isSelected;
@@ -90,20 +76,11 @@ class PrimaryColorButton extends StatelessWidget {
         width: kMinInteractiveDimension,
         height: kMinInteractiveDimension,
         padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: primaryColor.color,
-          shape: BoxShape.circle,
-        ),
-        child: isSelected
-            ? const Icon(
-                Icons.check,
-                size: kMinInteractiveDimension * 0.6,
-                color: Colors.white,
-              )
-            : const SizedBox(
-                height: kMinInteractiveDimension * 0.6,
-                width: kMinInteractiveDimension * 0.6,
-              ),
+        decoration: BoxDecoration(color: primaryColor.color, shape: BoxShape.circle),
+        child:
+            isSelected
+                ? const Icon(Icons.check, size: kMinInteractiveDimension * 0.6, color: Colors.white)
+                : const SizedBox(height: kMinInteractiveDimension * 0.6, width: kMinInteractiveDimension * 0.6),
       ),
     );
   }
@@ -117,26 +94,14 @@ class Footer extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          'Version: 0.0.1',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
+        Text('Version: 0.0.1', style: Theme.of(context).textTheme.titleSmall),
         RichText(
           text: TextSpan(
             style: Theme.of(context).textTheme.titleMedium,
             children: [
-              const TextSpan(
-                text: 'Made with ',
-              ),
-              TextSpan(
-                text: '❤️',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              const TextSpan(
-                text: ' in Berlin',
-              ),
+              const TextSpan(text: 'Made with '),
+              TextSpan(text: '❤️', style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+              const TextSpan(text: ' in Berlin'),
             ],
           ),
         ),
@@ -145,20 +110,20 @@ class Footer extends StatelessWidget {
           spacing: 8,
           children: [
             TextButton(
-              onPressed: () => showLicensePage(
-                context: context,
-                applicationName: context.l10n.appTitle,
-                applicationLegalese: '© 2023 defuncart',
-              ),
-              child: Text(
-                MaterialLocalizations.of(context).viewLicensesButtonLabel,
-              ),
+              onPressed:
+                  () => showLicensePage(
+                    context: context,
+                    applicationName: context.l10n.appTitle,
+                    applicationLegalese: '© 2023 defuncart',
+                  ),
+              child: Text(MaterialLocalizations.of(context).viewLicensesButtonLabel),
             ),
             TextButton(
-              onPressed: () => launchUrl(
-                Uri.parse('https://github.com/defuncart/qr_code_wallet'),
-                mode: LaunchMode.platformDefault,
-              ),
+              onPressed:
+                  () => launchUrl(
+                    Uri.parse('https://github.com/defuncart/qr_code_wallet'),
+                    mode: LaunchMode.platformDefault,
+                  ),
               child: Text(context.l10n.settingsSourceCode),
             ),
           ],
@@ -166,9 +131,7 @@ class Footer extends StatelessWidget {
         _TextWithLink(
           text: '${context.l10n.settingsDataPrivacy1} ${context.l10n.settingsDataPrivacy2}',
           url: 'https://github.com/defuncart/qr_code_wallet/blob/main/privacy_policy.md',
-          textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                fontWeight: FontWeight.normal,
-              ),
+          textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.normal),
           linkColor: Theme.of(context).colorScheme.primary,
         ),
       ],
@@ -177,12 +140,7 @@ class Footer extends StatelessWidget {
 }
 
 class _TextWithLink extends StatelessWidget {
-  const _TextWithLink({
-    required this.text,
-    required this.url,
-    required this.textStyle,
-    required this.linkColor,
-  });
+  const _TextWithLink({required this.text, required this.url, required this.textStyle, required this.linkColor});
 
   final String text;
   final String url;
@@ -193,50 +151,34 @@ class _TextWithLink extends StatelessWidget {
   Widget build(BuildContext context) {
     final start = text.indexOf('<a>');
     final end = text.indexOf('</a>');
-    final components = start != -1 && end != -1 && end > start
-        ? [
-            TextSpan(
-              text: text.substring(0, start),
-            ),
-            _ClickableTextSpan(
-              text: text.substring(start, end).replaceAll('<a>', ''),
-              style: TextStyle(
-                color: linkColor ?? Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
+    final components =
+        start != -1 && end != -1 && end > start
+            ? [
+              TextSpan(text: text.substring(0, start)),
+              _ClickableTextSpan(
+                text: text.substring(start, end).replaceAll('<a>', ''),
+                style: TextStyle(
+                  color: linkColor ?? Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.bold,
+                ),
+                url: url,
               ),
-              url: url,
-            ),
-            TextSpan(
-              text: text.substring(end).replaceAll('</a>', ''),
-            ),
-          ]
-        : [
-            TextSpan(text: text),
-          ];
+              TextSpan(text: text.substring(end).replaceAll('</a>', '')),
+            ]
+            : [TextSpan(text: text)];
 
     return RichText(
       textAlign: TextAlign.justify,
-      text: TextSpan(
-        style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
-        children: components,
-      ),
+      text: TextSpan(style: textStyle ?? Theme.of(context).textTheme.bodyMedium, children: components),
     );
   }
 }
 
 class _ClickableTextSpan extends TextSpan {
-  _ClickableTextSpan({
-    required String super.text,
-    super.style,
-    required String url,
-  }) : super(
-          recognizer: TapGestureRecognizer()..onTap = () async => await _openUrl(url),
-        );
+  _ClickableTextSpan({required String super.text, super.style, required String url})
+    : super(recognizer: TapGestureRecognizer()..onTap = () async => await _openUrl(url));
 
   static Future<void> _openUrl(String url) async {
-    await launchUrl(
-      Uri.parse(url),
-      mode: LaunchMode.platformDefault,
-    );
+    await launchUrl(Uri.parse(url), mode: LaunchMode.platformDefault);
   }
 }
