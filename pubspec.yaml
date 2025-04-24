@@ -30,6 +30,7 @@ dependencies:
   gap:
   url_launcher:
   share_plus:
+  flutter_expandable_fab:
 
 dev_dependencies:
   flutter_test:

@@ -15,13 +15,19 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.settingsPageTitle)),
-      body: const Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Expanded(child: PrimaryColorSettings()),
-            Align(alignment: Alignment.bottomCenter, child: Footer()),
-          ],
+      body: const SafeArea(
+        top: false,
+        bottom: true,
+        left: false,
+        right: false,
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Expanded(child: PrimaryColorSettings()),
+              Align(alignment: Alignment.bottomCenter, child: Footer()),
+            ],
+          ),
         ),
       ),
     );
@@ -114,7 +120,7 @@ class Footer extends StatelessWidget {
                   () => showLicensePage(
                     context: context,
                     applicationName: context.l10n.appTitle,
-                    applicationLegalese: '© 2023 defuncart',
+                    applicationLegalese: '© 2025 defuncart',
                   ),
               child: Text(MaterialLocalizations.of(context).viewLicensesButtonLabel),
             ),
