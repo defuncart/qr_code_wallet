@@ -63,3 +63,4 @@ flutter_launcher_icons:
   image_path: "assets_dev/app_icons/app_icon.png"
   adaptive_icon_background: "#FFC107"
   adaptive_icon_foreground: "assets_dev/app_icons/android_icon_foreground.png"
+  adaptive_icon_monochrome: "assets_dev/app_icons/android_icon_foreground.png"
