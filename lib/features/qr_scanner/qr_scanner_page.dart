@@ -24,33 +24,32 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.scannerTitle)),
-      body:
-          _data != null
-              ? const SizedBox()
-              : QRCodeScanner(
-                onCodeScanned: (data) {
-                  if (_data == null) {
-                    setState(() {
-                      _data = data;
-                    });
+      body: _data != null
+          ? const SizedBox()
+          : QRCodeScanner(
+              onCodeScanned: (data) {
+                if (_data == null) {
+                  setState(() {
+                    _data = data;
+                  });
 
-                    final label = _generatedLabelForData(data);
-                    final id = ref
-                        .read(codesDbProvider)
-                        .addEntry(
-                          type: data.type,
-                          data: data.rawValue,
-                          label: label,
-                          email: data.email,
-                          phone: data.phone,
-                          sms: data.sms,
-                          wifi: data.wifi,
-                        );
+                  final label = _generatedLabelForData(data);
+                  final id = ref
+                      .read(codesDbProvider)
+                      .addEntry(
+                        type: data.type,
+                        data: data.rawValue,
+                        label: label,
+                        email: data.email,
+                        phone: data.phone,
+                        sms: data.sms,
+                        wifi: data.wifi,
+                      );
 
-                    context.replace('/details/$id');
-                  }
-                },
-              ),
+                  context.replace('/details/$id');
+                }
+              },
+            ),
     );
   }
 
@@ -66,15 +65,14 @@ class _QRScannerWidgetState extends ConsumerState<QRScannerPage> {
   };
 }
 
-typedef ScannedCode =
-    ({
-      String rawValue,
-      QRCodeType type,
-      EmailQRCodeData? email,
-      PhoneQRCodeData? phone,
-      SMSQRCodeData? sms,
-      WifiQRCodeData? wifi,
-    });
+typedef ScannedCode = ({
+  String rawValue,
+  QRCodeType type,
+  EmailQRCodeData? email,
+  PhoneQRCodeData? phone,
+  SMSQRCodeData? sms,
+  WifiQRCodeData? wifi,
+});
 
 class QRCodeScanner extends StatelessWidget {
   const QRCodeScanner({super.key, required this.onCodeScanned});

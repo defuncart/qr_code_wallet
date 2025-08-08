@@ -38,18 +38,15 @@ class HomePageContent extends ConsumerWidget {
     final codes = ref.watch(watchCodesProvider);
 
     return codes.maybeMap(
-      data:
-          (data) =>
-              data.value.isEmpty
-                  ? Center(child: Text(context.l10n.homeNoSavedCodes))
-                  : ListView.builder(
-                    itemCount: data.value.length,
-                    itemBuilder:
-                        (context, index) => QRTile(
-                          qrCode: data.value[index],
-                          onDismiss: () => ref.read(codesDbProvider).removeEntry(data.value[index].id),
-                        ),
-                  ),
+      data: (data) => data.value.isEmpty
+          ? Center(child: Text(context.l10n.homeNoSavedCodes))
+          : ListView.builder(
+              itemCount: data.value.length,
+              itemBuilder: (context, index) => QRTile(
+                qrCode: data.value[index],
+                onDismiss: () => ref.read(codesDbProvider).removeEntry(data.value[index].id),
+              ),
+            ),
       orElse: () => const SizedBox.shrink(),
     );
   }
@@ -66,7 +63,10 @@ class QRTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key('qrCode-${qrCode.id}'),
-      background: const ColoredBox(color: Colors.red, child: Icon(Icons.delete, color: Colors.white)),
+      background: const ColoredBox(
+        color: Colors.red,
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
       direction: DismissDirection.endToStart,
       onDismissed: (_) => onDismiss(),
       child: ListTile(

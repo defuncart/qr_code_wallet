@@ -45,16 +45,15 @@ class PrimaryColorSettings extends ConsumerWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           spacing: 8,
-          children:
-              PrimaryColor.values
-                  .map(
-                    (pColor) => PrimaryColorButton(
-                      primaryColor: pColor,
-                      isSelected: primaryColor == pColor,
-                      onTap: () => ref.read(primaryColorControllerProvider.notifier).set(pColor),
-                    ),
-                  )
-                  .toList(),
+          children: PrimaryColor.values
+              .map(
+                (pColor) => PrimaryColorButton(
+                  primaryColor: pColor,
+                  isSelected: primaryColor == pColor,
+                  onTap: () => ref.read(primaryColorControllerProvider.notifier).set(pColor),
+                ),
+              )
+              .toList(),
         ),
       ],
     );
@@ -77,10 +76,9 @@ class PrimaryColorButton extends StatelessWidget {
         height: kMinInteractiveDimension,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(color: primaryColor.color, shape: BoxShape.circle),
-        child:
-            isSelected
-                ? const Icon(Icons.check, size: kMinInteractiveDimension * 0.6, color: Colors.white)
-                : const SizedBox(height: kMinInteractiveDimension * 0.6, width: kMinInteractiveDimension * 0.6),
+        child: isSelected
+            ? const Icon(Icons.check, size: kMinInteractiveDimension * 0.6, color: Colors.white)
+            : const SizedBox(height: kMinInteractiveDimension * 0.6, width: kMinInteractiveDimension * 0.6),
       ),
     );
   }
@@ -100,7 +98,10 @@ class Footer extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
             children: [
               const TextSpan(text: 'Made with '),
-              TextSpan(text: '❤️', style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+              TextSpan(
+                text: '❤️',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
               const TextSpan(text: ' in Berlin'),
             ],
           ),
@@ -110,20 +111,18 @@ class Footer extends StatelessWidget {
           spacing: 8,
           children: [
             TextButton(
-              onPressed:
-                  () => showLicensePage(
-                    context: context,
-                    applicationName: context.l10n.appTitle,
-                    applicationLegalese: '© 2023 defuncart',
-                  ),
+              onPressed: () => showLicensePage(
+                context: context,
+                applicationName: context.l10n.appTitle,
+                applicationLegalese: '© 2023 defuncart',
+              ),
               child: Text(MaterialLocalizations.of(context).viewLicensesButtonLabel),
             ),
             TextButton(
-              onPressed:
-                  () => launchUrl(
-                    Uri.parse('https://github.com/defuncart/qr_code_wallet'),
-                    mode: LaunchMode.platformDefault,
-                  ),
+              onPressed: () => launchUrl(
+                Uri.parse('https://github.com/defuncart/qr_code_wallet'),
+                mode: LaunchMode.platformDefault,
+              ),
               child: Text(context.l10n.settingsSourceCode),
             ),
           ],
@@ -151,21 +150,20 @@ class _TextWithLink extends StatelessWidget {
   Widget build(BuildContext context) {
     final start = text.indexOf('<a>');
     final end = text.indexOf('</a>');
-    final components =
-        start != -1 && end != -1 && end > start
-            ? [
-              TextSpan(text: text.substring(0, start)),
-              _ClickableTextSpan(
-                text: text.substring(start, end).replaceAll('<a>', ''),
-                style: TextStyle(
-                  color: linkColor ?? Theme.of(context).colorScheme.secondary,
-                  fontWeight: FontWeight.bold,
-                ),
-                url: url,
+    final components = start != -1 && end != -1 && end > start
+        ? [
+            TextSpan(text: text.substring(0, start)),
+            _ClickableTextSpan(
+              text: text.substring(start, end).replaceAll('<a>', ''),
+              style: TextStyle(
+                color: linkColor ?? Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold,
               ),
-              TextSpan(text: text.substring(end).replaceAll('</a>', '')),
-            ]
-            : [TextSpan(text: text)];
+              url: url,
+            ),
+            TextSpan(text: text.substring(end).replaceAll('</a>', '')),
+          ]
+        : [TextSpan(text: text)];
 
     return RichText(
       textAlign: TextAlign.justify,

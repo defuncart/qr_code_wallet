@@ -43,34 +43,31 @@ void main() {
     screens: [
       ScreenshotScenario(
         onBuildScreen: () => const HomePage(),
-        wrapper:
-            (child) => ProviderScope(
-              overrides: [watchCodesProvider.overrideWith((ref) => Stream.value(qrCodes))],
-              child: child,
-            ),
+        wrapper: (child) => ProviderScope(
+          overrides: [watchCodesProvider.overrideWith((ref) => Stream.value(qrCodes))],
+          child: child,
+        ),
       ),
       ScreenshotScenario(
         onSetUp: (_) {
           when(() => mockQRDBRepository.get(1)).thenReturn(qrCodes.first);
         },
         onBuildScreen: () => const QRDetailsPage(id: 1),
-        wrapper:
-            (child) => ProviderScope(
-              overrides: [
-                // workaround until watchCodesProvider.overrideWith lands in stable
-                codesDbProvider.overrideWithValue(mockQRDBRepository),
-              ],
-              child: child,
-            ),
+        wrapper: (child) => ProviderScope(
+          overrides: [
+            // workaround until watchCodesProvider.overrideWith lands in stable
+            codesDbProvider.overrideWithValue(mockQRDBRepository),
+          ],
+          child: child,
+        ),
       ),
       ScreenshotScenario(
         onBuildScreen: () => const SettingsPage(),
-        wrapper:
-            (child) => ProviderScope(
-              key: UniqueKey(),
-              overrides: [settingsRepositoryProvider.overrideWithValue(mockSettingsRepository)],
-              child: child,
-            ),
+        wrapper: (child) => ProviderScope(
+          key: UniqueKey(),
+          overrides: [settingsRepositoryProvider.overrideWithValue(mockSettingsRepository)],
+          child: child,
+        ),
       ),
     ],
   );
