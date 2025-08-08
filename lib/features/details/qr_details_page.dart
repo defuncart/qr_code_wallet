@@ -32,7 +32,10 @@ class QRDetailsPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             spacing: qrCode.canLaunch ? 32 : 48,
             children: [
-              IconButton(onPressed: () => Share.share(qrCode.data), icon: const Icon(Icons.share)),
+              IconButton(
+                onPressed: () => SharePlus.instance.share(ShareParams(text: qrCode.data)),
+                icon: const Icon(Icons.share),
+              ),
               IconButton(
                 onPressed: () => Clipboard.setData(ClipboardData(text: qrCode.data)),
                 icon: const Icon(Icons.copy),

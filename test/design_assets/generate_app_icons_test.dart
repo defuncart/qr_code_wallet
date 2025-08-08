@@ -20,7 +20,9 @@ class AppIcon extends StatelessWidget {
       width: size,
       height: size,
       color: hasTransparentBackground ? Colors.transparent : PrimaryColor.amber.color,
-      child: Center(child: Icon(Icons.qr_code, color: Colors.white, size: size * 0.70)),
+      child: Center(
+        child: Icon(Icons.qr_code, color: Colors.white, size: size * 0.70),
+      ),
     );
   }
 }
