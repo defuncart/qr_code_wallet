@@ -39,7 +39,6 @@ void main() {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       background: ScreenshotBackground.solid(color: primaryColor.color),
       theme: DarkTheme.generate(primaryColor: primaryColor.color),
-      textOptions: const ScreenshotTextOptions(textStyle: TextStyle(fontSize: 96, color: Colors.white)),
     ),
     screens: [
       ScreenshotScenario(

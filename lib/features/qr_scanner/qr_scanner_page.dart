@@ -91,7 +91,7 @@ class QRCodeScanner extends StatelessWidget {
         torchEnabled: false,
         formats: [BarcodeFormat.qrCode],
       ),
-      placeholderBuilder: (context, _) => ColoredBox(color: Theme.of(context).scaffoldBackgroundColor),
+      placeholderBuilder: (context) => ColoredBox(color: Theme.of(context).scaffoldBackgroundColor),
       onDetect: (capture) {
         final barcodes = capture.barcodes;
         for (final barcode in barcodes) {
